@@ -7,6 +7,9 @@ androidExtensions {
     experimental = true
 }
 
+def STRING = 'String'
+def Github_API_KEY = '"' + Github_API_KEY + '"' ?: '"Define your Github API Key!"'
+
 android {
     compileSdkVersion 29
 
@@ -18,6 +21,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        each{type ->
+            type.buildConfigField STRING, 'Github_API_KEY', Github_API_KEY
+        }
     }
 
     buildTypes {
