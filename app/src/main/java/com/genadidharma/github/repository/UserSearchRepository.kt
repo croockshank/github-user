@@ -4,7 +4,6 @@ import com.genadidharma.github.datastore.usersearch.UserSearchSetDataStore
 import com.genadidharma.github.model.UserSearchItem
 
 class UserSearchRepository private constructor(): BaseRepository<UserSearchSetDataStore>(){
-    private val setRemoteDataStore: UserSearchSetDataStore? = null
 
     suspend fun getUsers(username: String): MutableList<UserSearchItem>?{
         return remoteDataStore?.getUsers(username)
