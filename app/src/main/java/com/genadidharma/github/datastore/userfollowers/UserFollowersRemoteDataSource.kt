@@ -2,14 +2,14 @@ package com.genadidharma.github.datastore.userfollowers
 
 import com.genadidharma.github.model.UserFollowersItem
 import com.genadidharma.github.webservice.GithubAPIService
-import java.lang.Exception
 
-class UserFollowersRemoteDataSource (private val githubAPIService: GithubAPIService): UserFollowersDataSource {
+class UserFollowersRemoteDataSource(private val githubAPIService: GithubAPIService) :
+    UserFollowersDataSource {
     override suspend fun getFollowers(username: String): MutableList<UserFollowersItem>? {
         val response = githubAPIService.getUserFollowers(username);
-        if(response.isSuccessful) return response.body()?.items
+        if (response.isSuccessful) return response.body()?.items
 
-        throw Exception("${response.code()}: ${response.message()}")
+        throw java.lang.Exception("${response.code()}: ${response.message()}")
     }
 
     override suspend fun addAll(username: String, followers: MutableList<UserFollowersItem>?) {
