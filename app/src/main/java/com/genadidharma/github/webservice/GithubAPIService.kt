@@ -7,11 +7,12 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface GithubAPIService {
-    @GET("search/users?q={username}")
+    @GET("search/users")
     @Headers("Authorization: token ${BuildConfig.Github_API_KEY}")
-    suspend fun getUsers(@Path("username") username: String): Response<UserSearchItem.UserSearchResponse>
+    suspend fun getUsers(@Query("q") username: String): Response<UserSearchItem.UserSearchResponse>
 
     @GET("users/{username}")
     @Headers("Authorization: token ${BuildConfig.Github_API_KEY}")
