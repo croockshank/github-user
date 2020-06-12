@@ -1,7 +1,7 @@
 package com.genadidharma.github.webservice
 
 import com.genadidharma.github.BuildConfig
-import com.genadidharma.github.model.UserDetailResponse
+import com.genadidharma.github.model.UserDetailItem
 import com.genadidharma.github.model.UserSearchItem
 import retrofit2.Response
 import retrofit2.http.GET
@@ -16,5 +16,5 @@ interface GithubAPIService {
 
     @GET("users/{username}")
     @Headers("Authorization: token ${BuildConfig.Github_API_KEY}")
-    suspend fun getUserDetail(@Path("username") username: String): Response<UserDetailResponse>
+    suspend fun getUserDetail(@Path("username") username: String): Response<UserDetailItem>
 }

@@ -1,16 +1,15 @@
-package com.genadidharma.github
+package com.genadidharma.github.ui.usersearch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.genadidharma.github.R
 import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.repository.UserSearchRepository
-import com.genadidharma.github.ui.usersearch.UserSearchAdapter
-import com.genadidharma.github.ui.usersearch.UserSearchViewModel
-import com.genadidharma.github.ui.usersearch.UserSearchViewModelFactory
-import com.genadidharma.github.ui.usersearch.UserSearchViewState
+import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModel
+import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
@@ -25,7 +24,10 @@ class MainActivity : AppCompatActivity() {
         adapter = UserSearchAdapter()
         rv_user.adapter = adapter
 
-        val factory = UserSearchViewModelFactory(UserSearchRepository.instance)
+        val factory =
+            UserSearchViewModelFactory(
+                UserSearchRepository.instance
+            )
         viewModel = ViewModelProvider(this, factory).get(UserSearchViewModel::class.java).apply {
             viewState.observe(this@MainActivity, Observer(this@MainActivity::handleState))
             if (viewState.value?.data == null) getUsers("ad")

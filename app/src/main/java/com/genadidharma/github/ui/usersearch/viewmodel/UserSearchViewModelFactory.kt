@@ -1,4 +1,4 @@
-package com.genadidharma.github.ui.usersearch
+package com.genadidharma.github.ui.usersearch.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +10,9 @@ class UserSearchViewModelFactory(
 ) : ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(UserSearchViewModel::class.java)){
-            return UserSearchViewModel(UserSearchRepository.instance) as T
+            return UserSearchViewModel(
+                userSearchRepository
+            ) as T
         }
         throw IllegalArgumentException()
     }

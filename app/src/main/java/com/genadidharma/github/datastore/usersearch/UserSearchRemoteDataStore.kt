@@ -4,12 +4,12 @@ import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.webservice.GithubAPIService
 import java.lang.Exception
 
-class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService): UserSearchSetDataStore{
+class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService): UserSearchDataStore{
     override suspend fun getUsers(username: String): MutableList<UserSearchItem>? {
         val response = githubAPIService.getUsers(username)
         if(response.isSuccessful) return response.body()?.items
 
-        throw Exception("Error code: ${response.code()}")
+        throw Exception("${response.code()}: ${response.message()}")
     }
 
     override suspend fun addAll(username: String, users: MutableList<UserSearchItem>?) {
