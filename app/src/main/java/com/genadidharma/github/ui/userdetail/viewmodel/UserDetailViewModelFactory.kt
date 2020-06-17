@@ -3,14 +3,13 @@ package com.genadidharma.github.ui.userdetail.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.genadidharma.github.repository.UserDetailRepository
-import java.lang.IllegalArgumentException
 
 class UserDetailViewModelFactory(
     private val userDetailRepository: UserDetailRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UserDetailViewModel::class.java)) {
-            return userDetailRepository as T
+            return UserDetailViewModel(userDetailRepository) as T
         }
         throw IllegalArgumentException()
     }

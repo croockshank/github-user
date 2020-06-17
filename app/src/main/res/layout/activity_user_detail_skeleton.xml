@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.faltenreich.skeletonlayout.SkeletonLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/skl_user_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_user_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/activity_user_detail" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</com.faltenreich.skeletonlayout.SkeletonLayout>

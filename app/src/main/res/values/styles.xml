@@ -1,10 +1,169 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorPrimaryVariant">@color/brand_primary_variant</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorSecondaryVariant">@color/brand_secondary_variant</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorError">@color/red_700</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="android:statusBarColor">@color/brand_primary_variant</item>
+
+        <item name="appBarLayoutStyle">@style/AppTheme.AppBarOverlay</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Github.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Github.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Github.LargeComponent
+        </item>
+
+        <item name="buttonStyle">@style/Widget.MaterialComponents.Button.ButtonStyle</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="background">@color/brand_primary</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Github.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Github.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Github.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/oxygen</item>
+        <item name="android:fontFamily">@font/oxygen_bold</item>
+        <item name="android:textSize">95sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@font/oxygen_bold</item>
+        <item name="android:fontFamily">@font/oxygen_bold</item>
+        <item name="android:textSize">59sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/oxygen_bold</item>
+        <item name="android:fontFamily">@font/oxygen_bold</item>
+        <item name="android:textSize">48sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/oxygen</item>
+        <item name="android:fontFamily">@font/oxygen</item>
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline4.Transparent" parent="TextAppearance.MdcTypographyStyles.Headline4">
+        <item name="fontFamily">@font/oxygen</item>
+        <item name="android:fontFamily">@font/oxygen</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/oxygen_bold</item>
+        <item name="android:fontFamily">@font/oxygen_bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/oxygen</item>
+        <item name="android:fontFamily">@font/oxygen</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline6.White" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/oxygen</item>
+        <item name="android:fontFamily">@font/oxygen</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline6.Transparent" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/oxygen</item>
+        <item name="android:fontFamily">@font/oxygen</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/oxygen</item>
+        <item name="android:fontFamily">@font/oxygen</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/oxygen</item>
+        <item name="android:fontFamily">@font/oxygen</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Overline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Widget.MaterialComponents.Button.ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/brand_secondary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+        <item name="rippleColor">@android:color/darker_gray</item>
     </style>
 
 </resources>

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="brand_primary">#fafbfc </color>
+    <color name="brand_primary_variant">#b4bfca </color>
+    <color name="brand_secondary">#24292e</color>
+    <color name="brand_secondary_variant">#191b1d</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="red_700">#c2185b</color>
+    <dimen name="avatar_size">72dp</dimen>
 </resources>

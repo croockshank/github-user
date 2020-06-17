@@ -7,7 +7,9 @@ import java.lang.Exception
 class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService): UserSearchDataStore{
     override suspend fun getUsers(username: String): MutableList<UserSearchItem>? {
         val response = githubAPIService.getUsers(username)
-        if(response.isSuccessful) return response.body()?.items
+        if(response.isSuccessful){
+            return response.body()?.items
+        }
 
         throw Exception("${response.code()}: ${response.message()}")
     }

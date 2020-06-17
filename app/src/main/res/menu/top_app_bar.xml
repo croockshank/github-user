@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/ic_search"
+        android:contentDescription="@string/menu_search_user"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/menu_search_user_title"
+        app:showAsAction="collapseActionView|always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <item
+        android:id="@+id/ic_profile"
+        android:contentDescription="@string/menu_user_profile"
+        android:icon="@drawable/ic_profile_placeholder"
+        android:title="@string/menu_user_profile_title"
+        app:showAsAction="ifRoom" />
+</menu>
