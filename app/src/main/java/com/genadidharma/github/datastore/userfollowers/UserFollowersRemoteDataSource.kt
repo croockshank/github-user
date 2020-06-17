@@ -7,9 +7,9 @@ class UserFollowersRemoteDataSource(private val githubAPIService: GithubAPIServi
     UserFollowersDataSource {
     override suspend fun getFollowers(username: String): MutableList<UserFollowersItem>? {
         val response = githubAPIService.getUserFollowers(username);
-        if (response.isSuccessful) return response.body()?.items
+        if (response.isSuccessful) return response.body()
 
-        throw java.lang.Exception("${response.code()}: ${response.message()}")
+        throw Exception("Error: ${response.message()}(${response.code()})")
     }
 
     override suspend fun addAll(username: String, followers: MutableList<UserFollowersItem>?) {

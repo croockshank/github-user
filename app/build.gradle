@@ -68,10 +68,14 @@ dependencies {
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'jp.wasabeef:picasso-transformations:2.2.1'
+    implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 
     //Skeleton Loading
     implementation 'com.faltenreich:skeletonlayout:2.0.1'
 
+    //Lottie
+    implementation 'com.airbnb.android:lottie:3.4.0'
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"

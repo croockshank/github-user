@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,12 +14,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.applySkeleton
 import com.genadidharma.github.R
 import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.repository.UserSearchRepository
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModel
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModelFactory
 import com.genadidharma.github.ui.util.CircleTransform
+import com.genadidharma.github.ui.util.Constants
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,12 +30,14 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
+        private val TAG = MainActivity::class.java.simpleName
         const val USERNAME_ITEM_TAG = "username"
     }
 
-    private lateinit var viewModel: UserSearchViewModel
+    private var viewModel: UserSearchViewModel? = null
     private lateinit var adapter: UserSearchAdapter
+    private lateinit var skeleton: Skeleton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +47,9 @@ class MainActivity : AppCompatActivity() {
 
         adapter = UserSearchAdapter()
         rv_user.adapter = adapter
+        skeleton = rv_user.applySkeleton(R.layout.user_list_item, Constants.SKELETON_ITEM_COUNT)
+
+        setupViewModel()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,12 +61,14 @@ class MainActivity : AppCompatActivity() {
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { setupViewModel(it) }
-                return true
+                Log.i(TAG, "ViewModel: ${viewModel?.viewState?.value}")
+                viewModel?.username = query!!
+                searchView.clearFocus()
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                return true
+                return false
             }
 
         })
@@ -72,32 +83,34 @@ class MainActivity : AppCompatActivity() {
             .get()
             .load(R.drawable.img_avatar)
             .transform(CircleTransform())
+            .error(R.drawable.ic_baseline_person_24)
             .into(object : Target {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
 
                 }
 
                 override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-
+                    profileItem.icon = errorDrawable
                 }
 
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                     val d = BitmapDrawable(resources, bitmap)
-                    profileItem?.icon = d
+                    profileItem.icon = d
                 }
 
             })
     }
 
-    private fun setupViewModel(username: String) {
+    private fun setupViewModel() {
         val factory =
             UserSearchViewModelFactory(
                 UserSearchRepository.instance
             )
         viewModel = ViewModelProvider(this, factory).get(UserSearchViewModel::class.java).apply {
             viewState.observe(this@MainActivity, Observer(this@MainActivity::handleState))
-            getUsers(username)
-            srl_user.setOnRefreshListener { getUsers(username) }
+            srl_user.setOnRefreshListener {
+                username?.let { getUsers(it) }
+            }
         }
     }
 
@@ -110,19 +123,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toggleLoading(loading: Boolean) {
-        srl_user.isRefreshing = loading
+        if (!loading) skeleton.showOriginal() else {
+            gr_search_hint.visibility = View.GONE
+            skeleton.showSkeleton()
+        }
+        if (srl_user.isRefreshing) srl_user.isRefreshing = loading
     }
 
     private fun showData(data: MutableList<UserSearchItem>) {
-        adapter.updateData(data)
-        tv_error.visibility = View.GONE
         rv_user.visibility = View.VISIBLE
+        gr_error.visibility = View.GONE
+
+        adapter.updateData(data)
+        rv_user.visibility = View.VISIBLE
+        gr_error.visibility = View.GONE
+        gr_search_hint.visibility = View.GONE
     }
 
     private fun showError(e: Exception) {
-        tv_error.visibility = View.VISIBLE
-        tv_error.text = e.message
         rv_user.visibility = View.GONE
+        tv_error.text = e.message
+        gr_error.visibility = View.VISIBLE
+        gr_search_hint.visibility = View.GONE
     }
 
 }

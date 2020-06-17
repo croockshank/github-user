@@ -11,7 +11,7 @@ class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService)
             return response.body()?.items
         }
 
-        throw Exception("${response.code()}: ${response.message()}")
+        throw Exception("Error: ${response.message()}(${response.code()})")
     }
 
     override suspend fun addAll(username: String, users: MutableList<UserSearchItem>?) {

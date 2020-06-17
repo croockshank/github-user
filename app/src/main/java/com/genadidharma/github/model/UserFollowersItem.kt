@@ -60,9 +60,4 @@ data class UserFollowersItem(
 
     @field:SerializedName("organizations_url")
     val organizationsUrl: String? = null
-) : Parcelable {
-    @Parcelize
-    data class UserFollowersResponse(
-        val items: MutableList<UserFollowersItem>? = null
-    ) : Parcelable
-}
+) : Parcelable

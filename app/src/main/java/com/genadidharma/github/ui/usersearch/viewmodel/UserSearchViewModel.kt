@@ -7,15 +7,20 @@ import androidx.lifecycle.viewModelScope
 import com.genadidharma.github.repository.UserSearchRepository
 import com.genadidharma.github.ui.usersearch.UserSearchViewState
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class UserSearchViewModel(
     private val userSearchRepository: UserSearchRepository
 ) : ViewModel() {
-    private val mViewState = MutableLiveData<UserSearchViewState>().apply {
-        value =
-            UserSearchViewState(loading = true)
-    }
+    private val mViewState = MutableLiveData<UserSearchViewState>()
+
+    var username: String? = null
+        set(value) {
+            field = value
+            mViewState.apply {
+                this.value = UserSearchViewState(loading = true)
+            }
+            username?.let { getUsers(it) }
+        }
 
     val viewState: LiveData<UserSearchViewState>
         get() = mViewState

@@ -3,14 +3,13 @@ package com.genadidharma.github.ui.userfollowers.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.genadidharma.github.repository.UserFollowersRepository
-import java.lang.IllegalArgumentException
 
 class UserFollowersViewModelFactory(
     private val userFollowersRepository: UserFollowersRepository
-): ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(UserFollowersViewModel::class.java)){
-            return userFollowersRepository as T
+        if (modelClass.isAssignableFrom(UserFollowersViewModel::class.java)) {
+            return UserFollowersViewModel(userFollowersRepository) as T
         }
         throw IllegalArgumentException()
     }

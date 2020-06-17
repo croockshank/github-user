@@ -9,7 +9,7 @@ class UserDetailRemoteDataStore (private val githubAPIService: GithubAPIService)
         val response = githubAPIService.getUserDetail(username)
         if(response.isSuccessful) return response.body()
 
-        throw Exception("${response.code()}: ${response.message()}")
+        throw Exception("Error: ${response.message()}(${response.code()})")
     }
 
     override suspend fun addAll(username: String, user: UserDetailItem?) {

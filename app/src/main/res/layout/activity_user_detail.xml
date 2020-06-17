@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ml_detail"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ml_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:visibility="visible"
     app:layoutDescription="@xml/collapsing_animation"
-    tools:context=".ui.userdetail.UserDetailActivity">
+    tools:context=".ui.userdetail.UserDetailActivity"
+    tools:showIn="@layout/activity_user_detail_skeleton">
 
     <ImageView
         android:id="@+id/iv_banner"
@@ -21,6 +23,19 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ib_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:contentDescription="@string/back_button"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_baseline_arrow_back_24" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -37,8 +52,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="@dimen/bg_avatar_size"
+        android:layout_height="@dimen/bg_avatar_size"
         android:layout_margin="@dimen/med_spacing"
         android:src="@drawable/img_avatar"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title"
@@ -46,20 +61,20 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_banner"
-        app:layout_constraintVertical_bias="0.35000002" />
+        app:layout_constraintVertical_bias="0.42000002" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:text="@string/sample_name"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
-        android:text="@string/sample_name" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
 
     <TextView
         android:id="@+id/tv_email"
@@ -94,12 +109,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/oxygen_bold"
+        android:text="@string/sample_number_hundreds"
         android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
         app:layout_constraintEnd_toStartOf="@+id/v_divider_repo"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_follow"
-        android:text="@string/sample_number_hundreds" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_follow" />
 
     <TextView
         android:id="@+id/tv_repository_placeholder"
@@ -127,12 +142,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/oxygen_bold"
+        android:text="@string/sample_number_hundreds"
         android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
         app:layout_constraintEnd_toStartOf="@+id/v_divider_followers"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/v_divider_repo"
-        app:layout_constraintTop_toTopOf="@+id/v_divider_repo"
-        android:text="@string/sample_number_hundreds" />
+        app:layout_constraintTop_toTopOf="@+id/v_divider_repo" />
 
     <TextView
         android:id="@+id/tv_followers_placeholder"
@@ -161,14 +176,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/oxygen_bold"
+        android:text="@string/sample_number_hundreds"
         android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
         app:layout_constraintBottom_toBottomOf="@+id/v_divider_followers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/v_divider_followers"
         app:layout_constraintTop_toTopOf="@+id/v_divider_followers"
-        app:layout_constraintVertical_bias="0.0"
-        android:text="@string/sample_number_hundreds" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tv_following_placeholder"
@@ -201,5 +216,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabs" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lt_error_animation"
+        android:layout_width="@dimen/sm_lottie_animation_size"
+        android:layout_height="@dimen/sm_lottie_animation_size"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/error_coffee_spilled" />
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lt_error_animation" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gr_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="iv_banner, ib_back,tv_title,iv_avatar,tv_name,tv_email,btn_follow,tv_repository,tv_repository_placeholder,v_divider_repo,tv_followers,tv_followers_placeholder,v_divider_followers,tv_following,tv_following_placeholder,tabs,vp_tabs" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gr_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="lt_error_animation, tv_error"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

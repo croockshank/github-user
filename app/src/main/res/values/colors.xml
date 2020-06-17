@@ -7,5 +7,4 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="red_700">#c2185b</color>
-    <dimen name="avatar_size">72dp</dimen>
 </resources>

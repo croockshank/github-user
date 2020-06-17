@@ -22,9 +22,9 @@ interface GithubAPIService {
 
     @GET("users/{username}/followers")
     @Headers("Authorization: token ${BuildConfig.Github_API_KEY}")
-    suspend fun getUserFollowers(@Path("username") username: String): Response<UserFollowersItem.UserFollowersResponse>
+    suspend fun getUserFollowers(@Path("username") username: String): Response<MutableList<UserFollowersItem>?>
 
     @GET("users/{username}/following")
     @Headers("Authorization: token ${BuildConfig.Github_API_KEY}")
-    suspend fun getUserFollowings(@Path("username") username: String): Response<UserFollowingsItem.UserFollowersResponse>
+    suspend fun getUserFollowings(@Path("username") username: String): Response<MutableList<UserFollowingsItem>?>
 }
