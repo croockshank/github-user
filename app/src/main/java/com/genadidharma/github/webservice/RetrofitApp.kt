@@ -1,6 +1,5 @@
 package com.genadidharma.github.webservice
 
-import com.genadidharma.github.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

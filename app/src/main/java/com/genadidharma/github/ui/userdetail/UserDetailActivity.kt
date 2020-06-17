@@ -124,12 +124,12 @@ class UserDetailActivity : AppCompatActivity() {
         Picasso.get().load(data.avatarUrl)
             .transform(BlurTransformation(this, Constants.BLUR_RADIUS)).into(iv_banner)
         Picasso.get().load(data.avatarUrl).into(iv_avatar)
-        tv_title.text = data.name
-        tv_name.text = data.name
-        tv_email.text = data.email
-        tv_repository.text = Constants.convertNumber(data.publicRepos)
-        tv_followers.text = Constants.convertNumber(data.followers)
-        tv_following.text = Constants.convertNumber(data.following)
+        tv_title.text = data.login ?: "-"
+        tv_name.text = data.name ?: "-"
+        tv_email.text = data.email ?: "-"
+        tv_repository.text = Constants.convertNumber(data.publicRepos)?: "-"
+        tv_followers.text = Constants.convertNumber(data.followers) ?: "-"
+        tv_following.text = Constants.convertNumber(data.following) ?: "-"
     }
 
     private fun showError(e: Exception) {

@@ -2,7 +2,6 @@ package com.genadidharma.github.repository
 
 import com.genadidharma.github.datastore.usersearch.UserSearchDataStore
 import com.genadidharma.github.model.UserSearchItem
-import com.genadidharma.github.ui.userdetail.UserDetailViewState
 
 class UserSearchRepository private constructor(): BaseRepository<UserSearchDataStore>(){
 

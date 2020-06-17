@@ -11,11 +11,9 @@
     <string name="followers">followers</string>
     <string name="following">following</string>
     <string name="repositories">Repositories</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab_followers">Followers</string>
     <string name="tab_following">Following</string>
-    <string name="user_banner">user_banner</string>
+    <string name="user_banner">User Banner</string>
     <string name="sample_name">Genadi Dharma</string>
     <string name="sample_city">Denpasar</string>
     <string name="sample_number_hundreds">100</string>

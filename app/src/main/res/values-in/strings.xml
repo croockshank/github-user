@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github</string>
+    <string name="toolbar_user_title">Pengguna</string>
+    <string name="menu_search_user">Cari Pengguna</string>
+    <string name="menu_search_user_title">Cari Pengguna</string>
+    <string name="menu_user_profile">Profil Pengguna</string>
+    <string name="menu_user_profile_title">Profile Pengguna</string>
+    <string name="title_activity_user_detail">Detail Pengguna</string>
+    <string name="action_settings">Pengaturan</string>
+    <string name="follow">Ikuti</string>
+    <string name="followers">Pengikut</string>
+    <string name="following">Diikuti</string>
+    <string name="repositories">Repositori</string>
+    <string name="tab_followers">Pengikut</string>
+    <string name="tab_following">Diikuti</string>
+    <string name="user_banner">Baner Pengguna</string>
+    <string name="sample_name">Genadi Dharma</string>
+    <string name="sample_city">Denpasar</string>
+    <string name="sample_number_hundreds">100</string>
+    <string name="sample_number_thousands">1k</string>
+    <string name="sample_lorem">lorem</string>
+    <string name="back_button">Tombol Kembali</string>
+    <string name="search_hint">Ketuk Ikon Pencari untuk Memulai Pencarian</string>
+</resources>

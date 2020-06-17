@@ -1,9 +1,7 @@
 package com.genadidharma.github.datastore.userfollowers
 
-import com.genadidharma.github.model.UserFollowersItem
 import com.genadidharma.github.model.UserFollowingsItem
 import com.genadidharma.github.webservice.GithubAPIService
-import java.lang.Exception
 
 class UserFollowingsRemoteDataSource(private val githubAPIService: GithubAPIService) :
     UserFollowingsDataSource {

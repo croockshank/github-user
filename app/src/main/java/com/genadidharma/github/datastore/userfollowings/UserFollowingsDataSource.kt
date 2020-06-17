@@ -1,6 +1,5 @@
 package com.genadidharma.github.datastore.userfollowers
 
-import com.genadidharma.github.model.UserFollowersItem
 import com.genadidharma.github.model.UserFollowingsItem
 
 interface UserFollowingsDataSource {

@@ -13,7 +13,6 @@ import com.faltenreich.skeletonlayout.applySkeleton
 import com.genadidharma.github.R
 import com.genadidharma.github.model.UserFollowersItem
 import com.genadidharma.github.repository.UserFollowersRepository
-import com.genadidharma.github.ui.userdetail.UserDetailActivity
 import com.genadidharma.github.ui.userfollowers.viewmodel.UserFollowersViewModel
 import com.genadidharma.github.ui.userfollowers.viewmodel.UserFollowersViewModelFactory
 import com.genadidharma.github.ui.util.Constants

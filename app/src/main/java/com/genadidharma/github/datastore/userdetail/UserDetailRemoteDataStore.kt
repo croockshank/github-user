@@ -2,7 +2,6 @@ package com.genadidharma.github.datastore.userdetail
 
 import com.genadidharma.github.model.UserDetailItem
 import com.genadidharma.github.webservice.GithubAPIService
-import java.lang.Exception
 
 class UserDetailRemoteDataStore (private val githubAPIService: GithubAPIService): UserDetailDataStore {
     override suspend fun getUser(username: String): UserDetailItem? {

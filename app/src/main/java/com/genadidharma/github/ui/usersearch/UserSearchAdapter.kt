@@ -44,8 +44,8 @@ class UserSearchAdapter : RecyclerView.Adapter<UserSearchAdapter.UserSearchAdapt
             Picasso.get()
                 .load(item.avatarUrl)
                 .into(iv_avatar)
-            tv_name.text = item.login
-            tv_type.text = item.type
+            tv_name.text = item.login ?: "-"
+            tv_type.text = item.type ?: "-"
 
             containerView?.setOnClickListener {
                 val intent = Intent(context, UserDetailActivity::class.java)
