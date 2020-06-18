@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class UserFollowingsItem(
+data class UserFollowingItem(
 
     @field:SerializedName("gists_url")
     val gistsUrl: String? = null,

@@ -24,10 +24,6 @@ import kotlinx.android.synthetic.main.activity_user_detail_skeleton.*
 
 class UserDetailActivity : AppCompatActivity() {
 
-    companion object {
-        val TAG = UserDetailActivity::class.java.simpleName
-    }
-
     private var username: String? = null
     private lateinit var viewModel: UserDetailViewModel
     private lateinit var skeleton: Skeleton

@@ -1,4 +1,4 @@
-package com.genadidharma.github.ui.userfollowings
+package com.genadidharma.github.ui.userfollowing
 
 import android.os.Bundle
 import android.util.Log
@@ -11,29 +11,29 @@ import androidx.lifecycle.ViewModelProvider
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.genadidharma.github.R
-import com.genadidharma.github.model.UserFollowingsItem
-import com.genadidharma.github.repository.UserFollowingsRepository
-import com.genadidharma.github.ui.userfollowings.viewmodel.UserFollowingsViewModel
-import com.genadidharma.github.ui.userfollowings.viewmodel.UserFollowingsViewModelFactory
+import com.genadidharma.github.model.UserFollowingItem
+import com.genadidharma.github.repository.UserFollowingRepository
+import com.genadidharma.github.ui.userfollowing.viewmodel.UserFollowingViewModel
+import com.genadidharma.github.ui.userfollowing.viewmodel.UserFollowingViewModelFactory
 import com.genadidharma.github.ui.util.Constants
-import kotlinx.android.synthetic.main.fragment_followings.*
+import kotlinx.android.synthetic.main.fragment_following.*
 
-class FollowingsFragment : Fragment() {
+class FollowingFragment : Fragment() {
     companion object {
         const val USERNAME_TAG = "username"
-        private val TAG = FollowingsFragment::class.java.simpleName
-        private lateinit var viewModel: UserFollowingsViewModel
+        private val TAG = FollowingFragment::class.java.simpleName
+        private lateinit var viewModel: UserFollowingViewModel
     }
 
     private var username: String? = null
-    private lateinit var adapter: UserFollowingsAdapter
+    private lateinit var adapter: UserFollowingAdapter
     private lateinit var skeleton: Skeleton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_followings, container, false)
+        return inflater.inflate(R.layout.fragment_following, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class FollowingsFragment : Fragment() {
         val bundle = this.arguments
         username = bundle?.getString(USERNAME_TAG)
 
-        adapter = UserFollowingsAdapter()
+        adapter = UserFollowingAdapter()
         rv_following.adapter = adapter
         skeleton =
             rv_following.applySkeleton(R.layout.user_list_item, Constants.SKELETON_ITEM_COUNT)
@@ -53,7 +53,7 @@ class FollowingsFragment : Fragment() {
     }
 
     fun newInstance(username: String?): Fragment {
-        val fragment = FollowingsFragment()
+        val fragment = FollowingFragment()
         val bundle = Bundle()
         bundle.putString(USERNAME_TAG, username)
         fragment.arguments = bundle
@@ -62,20 +62,20 @@ class FollowingsFragment : Fragment() {
 
     private fun setupViewModel(username: String) {
         val factory =
-            UserFollowingsViewModelFactory(
-                UserFollowingsRepository.instance
+            UserFollowingViewModelFactory(
+                UserFollowingRepository.instance
             )
         viewModel =
-            ViewModelProvider(this, factory).get(UserFollowingsViewModel::class.java).apply {
+            ViewModelProvider(this, factory).get(UserFollowingViewModel::class.java).apply {
                 viewState.observe(
                     viewLifecycleOwner,
-                    Observer(this@FollowingsFragment::handleState)
+                    Observer(this@FollowingFragment::handleState)
                 )
                 getFollowings(username)
             }
     }
 
-    private fun handleState(viewState: UserFollowingsViewState?) {
+    private fun handleState(viewState: UserFollowingViewState?) {
         viewState?.let {
             toggleLoading(it.loading)
             it.data?.let { data -> showData(data) }
@@ -87,7 +87,7 @@ class FollowingsFragment : Fragment() {
         if (!loading) skeleton.showOriginal()
     }
 
-    private fun showData(data: MutableList<UserFollowingsItem>) {
+    private fun showData(data: MutableList<UserFollowingItem>) {
         adapter.updateData(data)
         tv_error.visibility = View.GONE
         rv_following.visibility = View.VISIBLE

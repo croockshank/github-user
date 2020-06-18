@@ -1,18 +1,18 @@
-package com.genadidharma.github.ui.userfollowings
+package com.genadidharma.github.ui.userfollowing
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.genadidharma.github.R
-import com.genadidharma.github.model.UserFollowingsItem
+import com.genadidharma.github.model.UserFollowingItem
 import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.user_list_item.*
 
-class UserFollowingsAdapter :
-    RecyclerView.Adapter<UserFollowingsAdapter.UserFollowersAdapterViewHolder>() {
-    private val userFollowingsList = mutableListOf<UserFollowingsItem>()
+class UserFollowingAdapter :
+    RecyclerView.Adapter<UserFollowingAdapter.UserFollowersAdapterViewHolder>() {
+    private val userFollowingsList = mutableListOf<UserFollowingItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserFollowersAdapterViewHolder =
         UserFollowersAdapterViewHolder(
@@ -25,7 +25,7 @@ class UserFollowingsAdapter :
         holder.bindItem(userFollowingsList[position])
     }
 
-    fun updateData(newUserSearchList: MutableList<UserFollowingsItem>) {
+    fun updateData(newUserSearchList: MutableList<UserFollowingItem>) {
         userFollowingsList.clear()
         userFollowingsList.addAll(newUserSearchList)
         notifyDataSetChanged()
@@ -37,7 +37,7 @@ class UserFollowingsAdapter :
         override val containerView: View?
             get() = itemView
 
-        fun bindItem(item: UserFollowingsItem) {
+        fun bindItem(item: UserFollowingItem) {
             Picasso.get()
                 .load(item.avatarUrl)
                 .into(iv_avatar)

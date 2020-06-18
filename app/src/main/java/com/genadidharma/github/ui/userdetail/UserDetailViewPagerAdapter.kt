@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.genadidharma.github.R
 import com.genadidharma.github.ui.userfollowers.FollowersFragment
-import com.genadidharma.github.ui.userfollowings.FollowingsFragment
+import com.genadidharma.github.ui.userfollowing.FollowingFragment
 
 class UserDetailViewPagerAdapter (private val mContext: Context, fm: FragmentManager, private val username: String?): FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
     @StringRes
@@ -17,7 +17,7 @@ class UserDetailViewPagerAdapter (private val mContext: Context, fm: FragmentMan
         var fragment: Fragment? =  null
         when(position){
             0 -> fragment = FollowersFragment().newInstance(username)
-            1 -> fragment = FollowingsFragment().newInstance(username)
+            1 -> fragment = FollowingFragment().newInstance(username)
         }
         return fragment as Fragment
     }

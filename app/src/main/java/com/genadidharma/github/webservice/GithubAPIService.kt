@@ -3,7 +3,7 @@ package com.genadidharma.github.webservice
 import com.genadidharma.github.BuildConfig
 import com.genadidharma.github.model.UserDetailItem
 import com.genadidharma.github.model.UserFollowersItem
-import com.genadidharma.github.model.UserFollowingsItem
+import com.genadidharma.github.model.UserFollowingItem
 import com.genadidharma.github.model.UserSearchItem
 import retrofit2.Response
 import retrofit2.http.GET
@@ -26,5 +26,5 @@ interface GithubAPIService {
 
     @GET("users/{username}/following")
     @Headers("Authorization: token ${BuildConfig.Github_API_KEY}")
-    suspend fun getUserFollowings(@Path("username") username: String): Response<MutableList<UserFollowingsItem>?>
+    suspend fun getUserFollowings(@Path("username") username: String): Response<MutableList<UserFollowingItem>?>
 }

@@ -3,11 +3,11 @@ package com.genadidharma.github.util
 import android.app.Application
 import com.genadidharma.github.datastore.userdetail.UserDetailRemoteDataStore
 import com.genadidharma.github.datastore.userfollowers.UserFollowersRemoteDataSource
-import com.genadidharma.github.datastore.userfollowers.UserFollowingsRemoteDataSource
+import com.genadidharma.github.datastore.userfollowings.UserFollowingRemoteDataSource
 import com.genadidharma.github.datastore.usersearch.UserSearchRemoteDataStore
 import com.genadidharma.github.repository.UserDetailRepository
 import com.genadidharma.github.repository.UserFollowersRepository
-import com.genadidharma.github.repository.UserFollowingsRepository
+import com.genadidharma.github.repository.UserFollowingRepository
 import com.genadidharma.github.repository.UserSearchRepository
 import com.genadidharma.github.webservice.RetrofitApp
 
@@ -29,8 +29,8 @@ class BaseApplication : Application() {
             init(UserFollowersRemoteDataSource(githubAPIService))
         }
 
-        UserFollowingsRepository.instance.apply {
-            init(UserFollowingsRemoteDataSource(githubAPIService))
+        UserFollowingRepository.instance.apply {
+            init(UserFollowingRemoteDataSource(githubAPIService))
         }
     }
 }

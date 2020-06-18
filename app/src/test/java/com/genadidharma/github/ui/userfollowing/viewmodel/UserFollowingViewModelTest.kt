@@ -1,7 +1,7 @@
-package com.genadidharma.github.ui.userfollowings.viewmodel
+package com.genadidharma.github.ui.userfollowing.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.genadidharma.github.repository.UserFollowingsRepository
+import com.genadidharma.github.repository.UserFollowingRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.setMain
@@ -14,22 +14,22 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class UserFollowingsViewModelTest{
+class UserFollowingViewModelTest{
     @Rule
     @JvmField
     val rule = InstantTaskExecutorRule()
 
     @Mock
-    var userFollowingsRepository: UserFollowingsRepository? = null
+    var userFollowingRepository: UserFollowingRepository? = null
 
-    private var userFollowersViewModel: UserFollowingsViewModel? = null
+    private var userFollowersViewModel: UserFollowingViewModel? = null
 
     @Before
     fun init(){
         MockitoAnnotations.initMocks(this)
         userFollowersViewModel =
-            UserFollowingsViewModel(
-                userFollowingsRepository!!
+            UserFollowingViewModel(
+                userFollowingRepository!!
             )
         Dispatchers.setMain(Dispatchers.Unconfined)
     }
@@ -45,7 +45,7 @@ class UserFollowingsViewModelTest{
     @Test
     fun shouldStopLoadingAndReturnDataWhenSuccess(){
         runBlocking {
-            Mockito.`when`(userFollowingsRepository?.getFollowings(ArgumentMatchers.anyString())).thenReturn(mutableListOf())
+            Mockito.`when`(userFollowingRepository?.getFollowings(ArgumentMatchers.anyString())).thenReturn(mutableListOf())
             userFollowersViewModel?.getFollowings(ArgumentMatchers.anyString())
             val state = userFollowersViewModel!!.viewState.value!!
             assertFalse(state.loading)
@@ -57,7 +57,7 @@ class UserFollowingsViewModelTest{
     @Test
     fun shouldThrowErrorWhenRepositoryIsThrowingError(){
         runBlocking {
-            Mockito.`when`(userFollowingsRepository?.getFollowings(ArgumentMatchers.anyString())).thenAnswer { throw Exception() }
+            Mockito.`when`(userFollowingRepository?.getFollowings(ArgumentMatchers.anyString())).thenAnswer { throw Exception() }
             userFollowersViewModel?.getFollowings(ArgumentMatchers.anyString())
             val state = userFollowersViewModel!!.viewState.value!!
             assertFalse(state.loading)
