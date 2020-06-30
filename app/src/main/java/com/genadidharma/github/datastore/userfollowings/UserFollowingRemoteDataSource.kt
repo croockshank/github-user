@@ -7,7 +7,7 @@ import com.genadidharma.github.webservice.GithubAPIService
 class UserFollowingRemoteDataSource(private val githubAPIService: GithubAPIService) :
     UserFollowingsDataSource {
     override suspend fun getFollowings(username: String): MutableList<UserFollowingItem>? {
-        val response = githubAPIService.getUserFollowings(username);
+        val response = githubAPIService.getUserFollowings(username)
         if (response.isSuccessful) return response.body()
 
         throw Exception("Error: ${response.message()}(${response.code()})")

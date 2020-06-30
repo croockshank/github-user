@@ -11,13 +11,13 @@ class Constants {
         fun convertNumber(count: Int?): String {
             if (count != null) {
 
-                if (count < 1000) return "" + count;
-                val exp = (Math.log(count.toDouble()) / ln(1000.0));
+                if (count < 1000) return "" + count
+                val exp = (Math.log(count.toDouble()) / ln(1000.0))
                 return String.format(
                     "%.0f%c",
                     count / 1000.0.pow(exp),
                     "kMGTPE"[(exp - 1).toInt()]
-                );
+                )
             }
             return "-"
         }

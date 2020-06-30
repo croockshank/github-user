@@ -123,9 +123,9 @@ class UserDetailActivity : AppCompatActivity() {
         tv_title.text = data.login ?: "-"
         tv_name.text = data.name ?: "-"
         tv_email.text = data.email ?: "-"
-        tv_repository.text = Constants.convertNumber(data.publicRepos)?: "-"
-        tv_followers.text = Constants.convertNumber(data.followers) ?: "-"
-        tv_following.text = Constants.convertNumber(data.following) ?: "-"
+        tv_repository.text = Constants.convertNumber(data.publicRepos)
+        tv_followers.text = Constants.convertNumber(data.followers)
+        tv_following.text = Constants.convertNumber(data.following)
     }
 
     private fun showError(e: Exception) {
