@@ -2,11 +2,14 @@ package com.genadidharma.github.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class UserFollowersItem(
+@Entity
+data class UserFavoriteItem(
+    @PrimaryKey val favoriteId: Int? = null,
 
     @field:SerializedName("gists_url")
     val gistsUrl: String? = null,
@@ -35,6 +38,9 @@ data class UserFollowersItem(
     @field:SerializedName("subscriptions_url")
     val subscriptionsUrl: String? = null,
 
+    @field:SerializedName("score")
+    val score: Double? = null,
+
     @field:SerializedName("received_events_url")
     val receivedEventsUrl: String? = null,
 
@@ -60,5 +66,20 @@ data class UserFollowersItem(
     val nodeId: String? = null,
 
     @field:SerializedName("organizations_url")
-    val organizationsUrl: String? = null
-) : Parcelable
+    val organizationsUrl: String? = null,
+
+    val isFavorite: Boolean = false
+) : Parcelable {
+    @Parcelize
+    data class UserSearchResponse(
+
+        @field:SerializedName("total_count")
+        val totalCount: Int? = null,
+
+        @field:SerializedName("incomplete_results")
+        val incompleteResults: Boolean? = null,
+
+        @field:SerializedName("items")
+        val items: MutableList<UserSearchItem>? = null
+    ) : Parcelable
+}

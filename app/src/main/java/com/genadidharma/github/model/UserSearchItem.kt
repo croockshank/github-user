@@ -1,12 +1,14 @@
 package com.genadidharma.github.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+@Entity
 data class UserSearchItem(
-
     @field:SerializedName("gists_url")
     val gistsUrl: String? = null,
 
@@ -62,7 +64,9 @@ data class UserSearchItem(
     val nodeId: String? = null,
 
     @field:SerializedName("organizations_url")
-    val organizationsUrl: String? = null
+    val organizationsUrl: String? = null,
+
+    val isFavorite: Boolean = false
 ) : Parcelable {
     @Parcelize
     data class UserSearchResponse(
