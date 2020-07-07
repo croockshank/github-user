@@ -2,13 +2,12 @@ package com.genadidharma.github.util
 
 import android.app.Application
 import com.genadidharma.github.datastore.userdetail.UserDetailRemoteDataStore
+import com.genadidharma.github.datastore.userfavorites.UserFavoritesRoomDataStore
 import com.genadidharma.github.datastore.userfollowers.UserFollowersRemoteDataSource
 import com.genadidharma.github.datastore.userfollowings.UserFollowingRemoteDataSource
 import com.genadidharma.github.datastore.usersearch.UserSearchRemoteDataStore
-import com.genadidharma.github.repository.UserDetailRepository
-import com.genadidharma.github.repository.UserFollowersRepository
-import com.genadidharma.github.repository.UserFollowingRepository
-import com.genadidharma.github.repository.UserSearchRepository
+import com.genadidharma.github.db.DatabaseApplication
+import com.genadidharma.github.repository.*
 import com.genadidharma.github.webservice.RetrofitApp
 
 class BaseApplication : Application() {
@@ -16,6 +15,7 @@ class BaseApplication : Application() {
         super.onCreate()
 
         val githubAPIService = RetrofitApp.GITHUB_API_SERVICE
+        val databaseApplication = DatabaseApplication.getInstance(this)
 
         UserSearchRepository.instance.apply {
             init(UserSearchRemoteDataStore(githubAPIService))
@@ -31,6 +31,9 @@ class BaseApplication : Application() {
 
         UserFollowingRepository.instance.apply {
             init(UserFollowingRemoteDataSource(githubAPIService))
+        }
+        UserFavoriteRepository.instance.apply {
+            initLocalOnly(UserFavoritesRoomDataStore(databaseApplication.userFavoriteDao()))
         }
     }
 }

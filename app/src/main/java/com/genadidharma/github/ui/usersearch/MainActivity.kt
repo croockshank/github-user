@@ -19,6 +19,7 @@ import com.faltenreich.skeletonlayout.applySkeleton
 import com.genadidharma.github.R
 import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.repository.UserSearchRepository
+import com.genadidharma.github.ui.userfavorites.viewmodel.UserFavoritesViewModel
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModel
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModelFactory
 import com.genadidharma.github.ui.util.CircleTransform

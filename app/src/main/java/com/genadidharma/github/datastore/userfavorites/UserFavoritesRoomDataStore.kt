@@ -4,7 +4,7 @@ import com.genadidharma.github.db.UserFavoritesDao
 import com.genadidharma.github.model.UserFavoriteItem
 
 class UserFavoritesRoomDataStore(private val userFavoriteDao: UserFavoritesDao) : UserFavoritesDataStore {
-    override suspend fun getUsers(): MutableList<UserFavoriteItem>? {
+    override suspend fun getFavorites(): MutableList<UserFavoriteItem>? {
         val response = userFavoriteDao.getFavorites()
         return if (response.isEmpty()) response else null
     }

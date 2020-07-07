@@ -5,7 +5,7 @@ import com.genadidharma.github.model.UserFavoriteItem
 
 class UserFavoriteRepository private constructor() : BaseRepository<UserFavoritesDataStore>() {
     suspend fun getUsers(): MutableList<UserFavoriteItem>? {
-        return localDataStore?.getUsers()
+        return localDataStore?.getFavorites()
     }
 
     suspend fun addToFavorite(userFavoriteItem: UserFavoriteItem) {
