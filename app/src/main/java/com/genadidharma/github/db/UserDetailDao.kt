@@ -14,6 +14,6 @@ interface UserDetailDao {
     suspend fun deleteAll()
 
     @Insert
-    suspend fun insertAll()
+    suspend fun insertAll(vararg userDetailItem: UserDetailItem)
 
 }

@@ -14,5 +14,5 @@ interface UserSearchDao {
     suspend fun deleteAll()
 
     @Insert
-    suspend fun insertAll()
+    suspend fun insertAll(userSearchItem: UserSearchItem)
 }

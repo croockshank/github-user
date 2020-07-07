@@ -22,4 +22,6 @@
     <string name="sample_lorem">lorem</string>
     <string name="back_button">Tombol Kembali</string>
     <string name="search_hint">Ketuk Ikon Pencari untuk Memulai Pencarian</string>
+    <string name="snackbar_error_message">Gagal menambahkan. Coba lagi</string>
+    <string name="retry">Coba Lagi</string>
 </resources>

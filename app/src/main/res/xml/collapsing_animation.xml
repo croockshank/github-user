@@ -85,67 +85,67 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintHorizontal_bias="0.5"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/tv_followers_placeholder"/>
+            motion:layout_constraintTop_toBottomOf="@+id/tv_followers_placeholder" />
         <Constraint
             android:id="@+id/vp_tabs"
-            motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/tabs" />
         <Constraint
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/contentLoadingProgressBar" />
+            android:id="@+id/contentLoadingProgressBar"
+            motion:layout_constraintEnd_toEndOf="parent" />
         <Constraint
+            android:id="@+id/tv_followers_placeholder"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintStart_toStartOf="@+id/tv_followers"
             android:layout_marginTop="4dp"
             motion:layout_constraintBottom_toBottomOf="@+id/v_divider_repo"
-            motion:layout_constraintHorizontal_bias="0.41"
             motion:layout_constraintEnd_toEndOf="@+id/tv_followers"
-            android:layout_width="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/tv_followers"
-            android:id="@+id/tv_followers_placeholder" />
+            motion:layout_constraintHorizontal_bias="0.41"
+            motion:layout_constraintStart_toStartOf="@+id/tv_followers"
+            motion:layout_constraintTop_toBottomOf="@+id/tv_followers" />
         <Constraint
+            android:id="@+id/tv_following_placeholder"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintStart_toStartOf="@+id/tv_following"
             android:layout_marginTop="4dp"
             motion:layout_constraintBottom_toBottomOf="@+id/v_divider_followers"
             motion:layout_constraintEnd_toEndOf="@+id/tv_following"
-            android:layout_width="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/tv_following"
-            android:id="@+id/tv_following_placeholder" />
+            motion:layout_constraintStart_toStartOf="@+id/tv_following"
+            motion:layout_constraintTop_toBottomOf="@+id/tv_following" />
         <Constraint
-            motion:layout_constraintTop_toTopOf="parent"
             android:id="@+id/ib_back"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            motion:layout_constraintStart_toStartOf="parent" />
-        <Constraint
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/ib_back"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" />
+            motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
-            android:layout_height="wrap_content"
-            motion:layout_constraintStart_toEndOf="@+id/v_divider_followers"
-            motion:layout_constraintTop_toTopOf="@+id/v_divider_followers"
-            motion:layout_constraintHorizontal_bias="0.5"
-            motion:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/ib_back"
             android:layout_width="wrap_content"
-            android:id="@+id/tv_following" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/tv_following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.5"
+            motion:layout_constraintStart_toEndOf="@+id/v_divider_followers"
+            motion:layout_constraintTop_toTopOf="@+id/v_divider_followers" />
         <Constraint
             android:id="@+id/tv_error"
-            motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toBottomOf="@+id/lt_error_animation"
+            android:layout_marginTop="16dp"
+            motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp" />
+            motion:layout_constraintTop_toBottomOf="@+id/lt_error_animation" />
     </ConstraintSet>
     <ConstraintSet android:id="@+id/collapsed">
         <Constraint
@@ -163,11 +163,11 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toTopOf="@+id/ib_back"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             motion:layout_constraintBottom_toBottomOf="@+id/ib_back"
             motion:layout_constraintStart_toEndOf="@+id/ib_back"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" />
+            motion:layout_constraintTop_toTopOf="@+id/ib_back" />
         <Constraint
             android:id="@+id/btn_follow"
             android:layout_width="wrap_content"
@@ -289,7 +289,7 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintHorizontal_bias="0.5"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/iv_banner"/>
+            motion:layout_constraintTop_toBottomOf="@id/iv_banner" />
         <Constraint
             android:id="@+id/iv_avatar"
             android:layout_width="32dp"
@@ -300,14 +300,14 @@
             motion:layout_constraintEnd_toEndOf="@+id/iv_banner"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintBottom_toBottomOf="@+id/iv_banner"
+            android:id="@+id/ib_back"
             android:layout_width="wrap_content"
-            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:id="@+id/ib_back" />
+            android:layout_marginTop="0dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/iv_banner"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/gr_error"
             android:layout_width="wrap_content"

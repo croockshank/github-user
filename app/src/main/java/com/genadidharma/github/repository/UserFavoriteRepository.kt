@@ -4,7 +4,7 @@ import com.genadidharma.github.datastore.userfavorites.UserFavoritesDataStore
 import com.genadidharma.github.model.UserFavoriteItem
 
 class UserFavoriteRepository private constructor() : BaseRepository<UserFavoritesDataStore>() {
-    suspend fun getUsers(): MutableList<UserFavoriteItem>? {
+    suspend fun getFavorites(): MutableList<UserFavoriteItem>? {
         return localDataStore?.getFavorites()
     }
 
@@ -12,8 +12,8 @@ class UserFavoriteRepository private constructor() : BaseRepository<UserFavorite
         localDataStore?.addToFavorite(userFavoriteItem)
     }
 
-    suspend fun removeFromFavorite(userFavoriteItem: UserFavoriteItem) {
-        localDataStore?.removeFromFavorite(userFavoriteItem)
+    suspend fun removeFromFavorite(login: String) {
+        localDataStore?.removeFromFavorite(login)
     }
 
     companion object {

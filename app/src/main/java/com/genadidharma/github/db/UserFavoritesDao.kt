@@ -11,8 +11,8 @@ interface UserFavoritesDao {
     @Query("SELECT * FROM UserFavoriteItem ORDER BY favoriteId DESC")
     suspend fun getFavorites(): MutableList<UserFavoriteItem>
 
-    @Delete
-    suspend fun removeFromFavorite(userFavoriteItem: UserFavoriteItem)
+    @Query("DELETE FROM UserFavoriteItem WHERE login = :login")
+    suspend fun removeFromFavorite(login: String)
 
     @Insert
     suspend fun addToFavorite(userFavoriteItem: UserFavoriteItem)

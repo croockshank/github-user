@@ -21,4 +21,6 @@
     <string name="sample_lorem">lorem</string>
     <string name="back_button">Back Button</string>
     <string name="search_hint">Tap Search Icon to Begin Search</string>
+    <string name="snackbar_error_message">Error adding to Favorite. Retry in 5 seconds</string>
+    <string name="retry">Retry</string>
 </resources>

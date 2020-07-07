@@ -9,6 +9,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity
 data class UserSearchItem(
+    @PrimaryKey val searchId: Int,
+
     @field:SerializedName("gists_url")
     val gistsUrl: String? = null,
 
@@ -66,7 +68,7 @@ data class UserSearchItem(
     @field:SerializedName("organizations_url")
     val organizationsUrl: String? = null,
 
-    val isFavorite: Boolean = false
+    var isFavorite: Boolean = false
 ) : Parcelable {
     @Parcelize
     data class UserSearchResponse(
@@ -81,3 +83,10 @@ data class UserSearchItem(
         val items: MutableList<UserSearchItem>? = null
     ) : Parcelable
 }
+
+fun UserSearchItem.toUserFavoriteItem() = UserFavoriteItem(
+    login = login,
+    type = type,
+    avatarUrl = avatarUrl,
+    isFavorite = isFavorite
+)

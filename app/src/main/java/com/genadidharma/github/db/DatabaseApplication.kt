@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.genadidharma.github.model.UserDetailItem
 import com.genadidharma.github.model.UserFavoriteItem
+import com.genadidharma.github.model.UserSearchItem
 
 @Database(
-    entities = [UserFavoriteItem::class],
+    entities = [UserSearchItem::class, UserDetailItem::class, UserFavoriteItem::class],
     version = 1,
     exportSchema = false
 )
