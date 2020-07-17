@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -22,7 +21,7 @@ import com.genadidharma.github.R
 import com.genadidharma.github.model.UserFavoriteItem
 import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.repository.UserFavoriteRepository
-import com.genadidharma.github.repository.UserSearchRepository
+import com.genadidharma.github.repository.usersearch.UserSearchRepository
 import com.genadidharma.github.ui.userfavorites.UserFavoritesViewState
 import com.genadidharma.github.ui.userfavorites.viewmodel.UserFavoritesViewModel
 import com.genadidharma.github.ui.userfavorites.viewmodel.UserFavoritesViewModelFactory

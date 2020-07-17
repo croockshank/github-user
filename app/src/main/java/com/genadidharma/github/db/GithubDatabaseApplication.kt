@@ -12,17 +12,21 @@ import com.genadidharma.github.model.UserSearchRemoteKey
     version = 1,
     exportSchema = false
 )
-abstract class GithubDB : RoomDatabase() {
+abstract class GithubDatabaseApplication : RoomDatabase() {
     companion object {
-        fun create(context: Context): GithubDB {
-            val databaseBuilder = Room.databaseBuilder(
+        private var instance: GithubDatabaseApplication? = null
+        fun getInstance(context: Context): GithubDatabaseApplication {
+            instance?.let {
+                return it
+            }
+            instance = Room.databaseBuilder(
                 context,
-                GithubDB::class.java,
-                "github"
+                GithubDatabaseApplication::class.java,
+                "db_github"
             )
-            return databaseBuilder
                 .fallbackToDestructiveMigration()
                 .build()
+            return instance!!
         }
     }
 

@@ -2,7 +2,7 @@ package com.genadidharma.github.ui.usersearch.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.genadidharma.github.repository.UserSearchRepository
+import com.genadidharma.github.repository.usersearch.UserSearchRepository
 
 class UserSearchViewModelFactory(
     private val userSearchRepository: UserSearchRepository

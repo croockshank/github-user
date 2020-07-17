@@ -2,8 +2,8 @@ package com.genadidharma.github.repository
 
 import com.genadidharma.github.datastore.usersearch.UserSearchRemoteDataStore
 import com.genadidharma.github.model.UserSearchItem
+import com.genadidharma.github.repository.usersearch.UserSearchRepository
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString

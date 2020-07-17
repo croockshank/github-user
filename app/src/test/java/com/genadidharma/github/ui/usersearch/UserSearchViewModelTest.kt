@@ -1,7 +1,7 @@
 package com.genadidharma.github.ui.usersearch
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.genadidharma.github.repository.UserSearchRepository
+import com.genadidharma.github.repository.usersearch.UserSearchRepository
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking

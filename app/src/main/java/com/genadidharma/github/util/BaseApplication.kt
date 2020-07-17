@@ -3,12 +3,15 @@ package com.genadidharma.github.util
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.genadidharma.github.datastore.userdetail.UserDetailRemoteDataStore
-import com.genadidharma.github.datastore.userfavorites.UserFavoritesRoomDataStore
 import com.genadidharma.github.datastore.userfollowers.UserFollowersRemoteDataSource
 import com.genadidharma.github.datastore.userfollowings.UserFollowingRemoteDataSource
 import com.genadidharma.github.datastore.usersearch.UserSearchRemoteDataStore
-import com.genadidharma.github.db.DatabaseApplication
-import com.genadidharma.github.repository.*
+import com.genadidharma.github.datastore.usersearch.UserSearchRoomDataStore
+import com.genadidharma.github.db.GithubDatabaseApplication
+import com.genadidharma.github.repository.UserDetailRepository
+import com.genadidharma.github.repository.UserFollowersRepository
+import com.genadidharma.github.repository.UserFollowingRepository
+import com.genadidharma.github.repository.usersearch.UserSearchRepository
 import com.genadidharma.github.webservice.RetrofitApp
 
 class BaseApplication : Application() {
@@ -18,25 +21,27 @@ class BaseApplication : Application() {
         Stetho.initializeWithDefaults(this)
 
         val githubAPIService = RetrofitApp.GITHUB_API_SERVICE
-        val databaseApplication = DatabaseApplication.getInstance(this)
+        val databaseApplication = GithubDatabaseApplication.getInstance(this)
 
         UserSearchRepository.instance.apply {
-            init(UserSearchRemoteDataStore(githubAPIService))
+            init(
+                UserSearchRoomDataStore(
+                    databaseApplication.userSearchDao(),
+                    databaseApplication.userSearchRemoteKeyDao()
+                ), UserSearchRemoteDataStore(githubAPIService)
+            )
         }
 
         UserDetailRepository.instance.apply {
-            init(UserDetailRemoteDataStore(githubAPIService))
+            init(null, UserDetailRemoteDataStore(githubAPIService))
         }
 
         UserFollowersRepository.instance.apply {
-            init(UserFollowersRemoteDataSource(githubAPIService))
+            init(null, UserFollowersRemoteDataSource(githubAPIService))
         }
 
         UserFollowingRepository.instance.apply {
-            init(UserFollowingRemoteDataSource(githubAPIService))
-        }
-        UserFavoriteRepository.instance.apply {
-            initLocalOnly(UserFavoritesRoomDataStore(databaseApplication.userFavoriteDao()))
+            init(null, UserFollowingRemoteDataSource(githubAPIService))
         }
     }
 }
