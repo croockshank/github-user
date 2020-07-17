@@ -14,7 +14,11 @@ import retrofit2.http.Query
 interface GithubAPIService {
     @GET("search/users")
     @Headers("Authorization: token ${BuildConfig.Github_API_KEY}")
-    suspend fun getUsers(@Query("q") username: String): Response<UserSearchItem.UserSearchResponse>
+    suspend fun getUsers(
+        @Query("q") keyword: String,
+        @Query("page") page: Int,
+        @Query("per_page") per_page: Int
+    ): Response<UserSearchItem.UserSearchResponse>
 
     @GET("users/{username}")
     @Headers("Authorization: token ${BuildConfig.Github_API_KEY}")

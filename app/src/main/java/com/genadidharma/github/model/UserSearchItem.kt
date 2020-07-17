@@ -7,8 +7,11 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity
+@Entity(tableName = "users_search")
 data class UserSearchItem(
+    @PrimaryKey
+    val rowId: Int? = null,
+
     @field:SerializedName("gists_url")
     val gistsUrl: String? = null,
 
@@ -37,7 +40,7 @@ data class UserSearchItem(
     val subscriptionsUrl: String? = null,
 
     @field:SerializedName("score")
-    val score: Double? = null,
+    val score: Int? = null,
 
     @field:SerializedName("received_events_url")
     val receivedEventsUrl: String? = null,
@@ -66,11 +69,10 @@ data class UserSearchItem(
     @field:SerializedName("organizations_url")
     val organizationsUrl: String? = null,
 
-    val isFavorite: Boolean = false
+    var indexInResponse: Int = -1
 ) : Parcelable {
     @Parcelize
     data class UserSearchResponse(
-
         @field:SerializedName("total_count")
         val totalCount: Int? = null,
 

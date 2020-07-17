@@ -1,13 +1,10 @@
 package com.genadidharma.github.model
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity
 data class UserDetailItem(
 
     @field:SerializedName("gists_url")
@@ -67,7 +64,7 @@ data class UserDetailItem(
     @field:SerializedName("owned_private_repos")
     val ownedPrivateRepos: Int? = null,
 
-    @PrimaryKey @field:SerializedName("id")
+    @field:SerializedName("id")
     val id: Int? = null,
 
     @field:SerializedName("public_repos")

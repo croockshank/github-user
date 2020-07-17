@@ -3,15 +3,18 @@ package com.genadidharma.github.datastore.usersearch
 import androidx.paging.PagingSource
 import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.model.UserSearchRemoteKey
-import com.genadidharma.github.webservice.GithubAPIService
+import com.genadidharma.github.db.UserSearchDao
+import com.genadidharma.github.db.UserSearchRemoteKeyDao
 
-class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService): UserSearchDataStore{
+
+class UserSearchRoomDataStore(private val userSearchDao: UserSearchDao, private val userSearchRemoteKeyDao: UserSearchRemoteKeyDao) :
+    UserSearchDataStore {
     override suspend fun insertUsers(users: MutableList<UserSearchItem>?) {
-        TODO("Not yet implemented")
+        return userSearchDao.insertUsers(users)
     }
 
     override suspend fun insertRemoteKey(remoteKey: UserSearchRemoteKey) {
-        TODO("Not yet implemented")
+        return userSearchRemoteKeyDao.insertRemoteKey(remoteKey)
     }
 
     override suspend fun getUsers(
@@ -19,28 +22,23 @@ class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService)
         page: Int,
         perPage: Int
     ): MutableList<UserSearchItem>? {
-        val response = githubAPIService.getUsers(keyword, page, perPage)
-        if (response.isSuccessful){
-            return response.body()?.items
-        }
-
-        throw Exception("Error: ${response.message()}(${response.code()})")
+        TODO("Not yet implemented")
     }
 
     override fun getUsersFromDB(): PagingSource<Int, UserSearchItem> {
-        TODO("Not yet implemented")
+        return userSearchDao.getUsers()
     }
 
     override suspend fun getUsersRemoteKey(): UserSearchRemoteKey {
-        TODO("Not yet implemented")
+        return userSearchRemoteKeyDao.getRemoteKey()
     }
 
     override suspend fun deleteUsers() {
-        TODO("Not yet implemented")
+        userSearchDao.deleteUsers()
     }
 
     override suspend fun deleteRemoteKey() {
-        TODO("Not yet implemented")
+        userSearchRemoteKeyDao.deleteRemoteKey()
     }
 
     override suspend fun addAll(username: String, users: MutableList<UserSearchItem>?) {
