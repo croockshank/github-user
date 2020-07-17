@@ -2,6 +2,7 @@ package com.genadidharma.github.ui.usersearch
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -10,6 +11,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -17,9 +19,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.genadidharma.github.R
+import com.genadidharma.github.model.UserFavoriteItem
 import com.genadidharma.github.model.UserSearchItem
+import com.genadidharma.github.repository.UserFavoriteRepository
 import com.genadidharma.github.repository.UserSearchRepository
+import com.genadidharma.github.ui.userfavorites.UserFavoritesViewState
 import com.genadidharma.github.ui.userfavorites.viewmodel.UserFavoritesViewModel
+import com.genadidharma.github.ui.userfavorites.viewmodel.UserFavoritesViewModelFactory
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModel
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModelFactory
 import com.genadidharma.github.ui.util.CircleTransform
@@ -33,10 +39,15 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
-        const val USERNAME_ITEM_TAG = "username"
+        const val USER_FAVORITE_ITEM_TAG = "favorite"
+        const val USER_IS_FAVORITE_TAG = "isFavorite"
+        const val USER_POSITION_TAG = "position"
+        const val REQUEST_LIKE = 200
+        const val RESULT_LIKE = 300
     }
 
     private var viewModel: UserSearchViewModel? = null
+    private var userFavoritesViewModel: UserFavoritesViewModel? = null
     private lateinit var adapter: UserSearchAdapter
     private lateinit var skeleton: Skeleton
 
@@ -46,11 +57,26 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        adapter = UserSearchAdapter()
+        adapter = UserSearchAdapter(this)
         rv_user.adapter = adapter
         skeleton = rv_user.applySkeleton(R.layout.user_list_item, Constants.SKELETON_ITEM_COUNT)
-
         setupViewModel()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
+            REQUEST_LIKE -> {
+                when(resultCode){
+                    RESULT_LIKE -> {
+                        val bundle = data?.extras
+                        val position = bundle!!.getInt(USER_POSITION_TAG)
+                        val isFavorite = bundle.getBoolean(USER_IS_FAVORITE_TAG)
+                        adapter.updateItem(position, isFavorite)
+                    }
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -62,8 +88,10 @@ class MainActivity : AppCompatActivity() {
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.i(TAG, "ViewModel: ${viewModel?.viewState?.value}")
                 viewModel?.username = query!!
+                userFavoritesViewModel?.apply {
+                    getFavorites()
+                }
                 searchView.clearFocus()
                 return false
             }
@@ -109,8 +137,19 @@ class MainActivity : AppCompatActivity() {
             )
         viewModel = ViewModelProvider(this, factory).get(UserSearchViewModel::class.java).apply {
             viewState.observe(this@MainActivity, Observer(this@MainActivity::handleState))
-            srl_user.setOnRefreshListener {
+        }
+
+        val userFavoriteFactory = UserFavoritesViewModelFactory(UserFavoriteRepository.instance)
+        userFavoritesViewModel = ViewModelProvider(this, userFavoriteFactory).get(UserFavoritesViewModel::class.java).apply {
+            viewState.observe(this@MainActivity, Observer(this@MainActivity::handleUserFavoritesState))
+        }
+
+        srl_user.setOnRefreshListener {
+            viewModel?.apply {
                 username?.let { getUsers(it) }
+            }
+            userFavoritesViewModel?.apply {
+                getFavorites()
             }
         }
     }
@@ -120,6 +159,12 @@ class MainActivity : AppCompatActivity() {
             toggleLoading(it.loading)
             it.data?.let { data -> showData(data) }
             it.error?.let { error -> showError(error) }
+        }
+    }
+
+    private fun handleUserFavoritesState(viewState: UserFavoritesViewState?) {
+        viewState?.let {
+            it.data?.let { data -> showDataFavorite(data) }
         }
     }
 
@@ -146,6 +191,11 @@ class MainActivity : AppCompatActivity() {
         tv_error.text = e.message
         gr_error.visibility = View.VISIBLE
         gr_search_hint.visibility = View.GONE
+    }
+
+    private fun showDataFavorite(data: MutableList<UserFavoriteItem>){
+        Log.e("Favorite data", data.toString())
+        adapter.updateFavoriteData(data)
     }
 
 }

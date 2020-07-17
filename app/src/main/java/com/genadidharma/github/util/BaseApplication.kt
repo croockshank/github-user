@@ -1,6 +1,7 @@
 package com.genadidharma.github.util
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.genadidharma.github.datastore.userdetail.UserDetailRemoteDataStore
 import com.genadidharma.github.datastore.userfavorites.UserFavoritesRoomDataStore
 import com.genadidharma.github.datastore.userfollowers.UserFollowersRemoteDataSource
@@ -13,6 +14,8 @@ import com.genadidharma.github.webservice.RetrofitApp
 class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+
+        Stetho.initializeWithDefaults(this)
 
         val githubAPIService = RetrofitApp.GITHUB_API_SERVICE
         val databaseApplication = DatabaseApplication.getInstance(this)
