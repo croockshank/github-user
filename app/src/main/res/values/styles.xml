@@ -26,6 +26,8 @@
         </item>
 
         <item name="buttonStyle">@style/Widget.MaterialComponents.Button.ButtonStyle</item>
+
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackBarButton</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="Theme.MaterialComponents.Light.DarkActionBar">
@@ -164,6 +166,11 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
         <item name="rippleColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="Widget.App.SnackBarButton" parent="Widget.MaterialComponents.Button.TextButton.Snackbar">
+        <item name="android:textColor">@color/brand_primary_variant</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
     </style>
 
 </resources>

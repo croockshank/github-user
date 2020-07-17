@@ -14,14 +14,9 @@ import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.createSkeleton
 import com.genadidharma.github.R
 import com.genadidharma.github.model.UserDetailItem
-import com.genadidharma.github.model.UserFavoriteItem
 import com.genadidharma.github.repository.UserDetailRepository
-import com.genadidharma.github.repository.UserFavoriteRepository
 import com.genadidharma.github.ui.userdetail.viewmodel.UserDetailViewModel
 import com.genadidharma.github.ui.userdetail.viewmodel.UserDetailViewModelFactory
-import com.genadidharma.github.ui.userfavorites.UserFavoritesViewState
-import com.genadidharma.github.ui.userfavorites.viewmodel.UserFavoritesViewModel
-import com.genadidharma.github.ui.userfavorites.viewmodel.UserFavoritesViewModelFactory
 import com.genadidharma.github.ui.usersearch.MainActivity
 import com.genadidharma.github.ui.util.Constants
 import com.google.android.material.snackbar.Snackbar
@@ -33,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_user_detail_skeleton.*
 
 class UserDetailActivity : AppCompatActivity() {
 
-    private var userFavoriteItem: UserFavoriteItem? = null
+    /*private var userFavoriteItem: UserFavoriteItem? = null
     private var position: Int? = null
     private lateinit var viewModel: UserDetailViewModel
     private lateinit var userFavoritesViewModel: UserFavoritesViewModel
@@ -202,5 +197,5 @@ class UserDetailActivity : AppCompatActivity() {
         else fab_favorite.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_baseline_favorite_border_24))
 
         userFavoriteItem?.isFavorite = isFavorite
-    }
+    }*/
 }

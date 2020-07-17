@@ -69,7 +69,9 @@ data class UserSearchItem(
     @field:SerializedName("organizations_url")
     val organizationsUrl: String? = null,
 
-    var indexInResponse: Int = -1
+    var indexInResponse: Int = -1,
+
+    var isFavorite: Boolean = false
 ) : Parcelable {
     @Parcelize
     data class UserSearchResponse(

@@ -1,10 +1,7 @@
 package com.genadidharma.github.db
 
 import androidx.paging.PagingSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.genadidharma.github.model.UserSearchItem
 
 @Dao
@@ -20,4 +17,5 @@ interface UserSearchDao {
 
     @Query("SELECT MAX(indexInResponse) + 1 FROM users_search")
     suspend fun getNextIndex(): Int
+
 }
