@@ -17,6 +17,14 @@ class UserSearchRoomDataStore(private val userSearchDao: UserSearchDao, private 
         return userSearchRemoteKeyDao.insertRemoteKey(remoteKey)
     }
 
+    override suspend fun updateToFavorite(userId: Int) {
+        return userSearchDao.updateToFavorite(userId = userId)
+    }
+
+    override suspend fun updateToNotFavorite(userId: Int) {
+        return userSearchDao.updateToNotFavorite(userId = userId)
+    }
+
     override suspend fun getUsers(
         keyword: String,
         page: Int,
@@ -25,8 +33,8 @@ class UserSearchRoomDataStore(private val userSearchDao: UserSearchDao, private 
         TODO("Not yet implemented")
     }
 
-    override fun getUsersFromDB(): PagingSource<Int, UserSearchItem> {
-        return userSearchDao.getUsers()
+    override fun getUsersFromDB(keyword: String): PagingSource<Int, UserSearchItem> {
+        return userSearchDao.getUsers(keyword = "%$keyword%")
     }
 
     override suspend fun getUsersRemoteKey(): UserSearchRemoteKey {

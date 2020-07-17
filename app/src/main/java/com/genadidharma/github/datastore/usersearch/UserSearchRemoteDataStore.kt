@@ -14,6 +14,14 @@ class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService)
         TODO("Not yet implemented")
     }
 
+    override suspend fun updateToFavorite(userId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteFromFavorite() {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getUsers(
         keyword: String,
         page: Int,
@@ -27,7 +35,7 @@ class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService)
         throw Exception("Error: ${response.message()}(${response.code()})")
     }
 
-    override fun getUsersFromDB(): PagingSource<Int, UserSearchItem> {
+    override fun getUsersFromDB(keyword: String): PagingSource<Int, UserSearchItem> {
         TODO("Not yet implemented")
     }
 

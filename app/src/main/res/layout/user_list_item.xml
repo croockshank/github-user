@@ -4,21 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/sm_spacing"
-    android:paddingBottom="@dimen/sm_spacing"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:paddingTop="@dimen/sm_spacing"
+    android:paddingBottom="@dimen/sm_spacing">
+
+    <ImageView
+        android:id="@+id/iv_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bg_spacing"
+        android:src="@drawable/ic_baseline_star_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_avatar"
         android:layout_width="@dimen/sm_avatar_size"
         android:layout_height="@dimen/sm_avatar_size"
-        android:layout_marginStart="@dimen/med_spacing"
-        tools:src="@tools:sample/avatars"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/bg_spacing"
+        app:layout_constraintStart_toEndOf="@+id/iv_favorite"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tv_name"
@@ -26,8 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/med_spacing"
         android:text="@string/sample_name"
-        android:textColor="@color/black"
         android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
         app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
 

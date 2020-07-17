@@ -11,8 +11,16 @@ class UserSearchRepository private constructor(): BaseRepository<UserSearchDataS
         config = PagingConfig(pageSize),
         remoteMediator = PageKeyedRemoteMediator(localDataStore, remoteDataStore, keyword)
     ){
-        localDataStore!!.getUsersFromDB()
+        localDataStore!!.getUsersFromDB(keyword)
     }.flow
+
+    suspend fun updateToFavorite(userId: Int){
+        localDataStore?.updateToFavorite(userId)
+    }
+
+    suspend fun updateToNotFavorite(userId: Int){
+        localDataStore?.updateToNotFavorite(userId)
+    }
 
     companion object{
         val instance by lazy { UserSearchRepository() }

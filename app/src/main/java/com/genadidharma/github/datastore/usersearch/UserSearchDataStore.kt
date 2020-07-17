@@ -9,9 +9,13 @@ interface UserSearchDataStore {
 
     suspend fun insertRemoteKey(remoteKey: UserSearchRemoteKey)
 
+    suspend fun updateToFavorite(userId: Int)
+
+    suspend fun updateToNotFavorite(userId: Int)
+
     suspend fun getUsers(keyword: String, page: Int, perPage: Int): MutableList<UserSearchItem>?
 
-    fun getUsersFromDB(): PagingSource<Int, UserSearchItem>
+    fun getUsersFromDB(keyword: String): PagingSource<Int, UserSearchItem>
 
     suspend fun getUsersRemoteKey(): UserSearchRemoteKey
 
