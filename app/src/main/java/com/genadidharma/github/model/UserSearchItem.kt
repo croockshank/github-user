@@ -2,6 +2,7 @@ package com.genadidharma.github.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -9,8 +10,13 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName = "users_search")
 data class UserSearchItem(
+
     @PrimaryKey
-    val rowId: Int? = null,
+    @field:SerializedName("id")
+    val id: Int,
+
+    @field:SerializedName("login")
+    val login: String,
 
     @field:SerializedName("gists_url")
     val gistsUrl: String? = null,
@@ -23,9 +29,6 @@ data class UserSearchItem(
 
     @field:SerializedName("starred_url")
     val starredUrl: String? = null,
-
-    @field:SerializedName("login")
-    val login: String? = null,
 
     @field:SerializedName("followers_url")
     val followersUrl: String? = null,
@@ -56,9 +59,6 @@ data class UserSearchItem(
 
     @field:SerializedName("site_admin")
     val siteAdmin: Boolean? = null,
-
-    @field:SerializedName("id")
-    val id: Int? = null,
 
     @field:SerializedName("gravatar_id")
     val gravatarId: String? = null,

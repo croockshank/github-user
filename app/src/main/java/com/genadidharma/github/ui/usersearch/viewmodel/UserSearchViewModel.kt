@@ -27,8 +27,8 @@ class UserSearchViewModel(private val userSearchRepository: UserSearchRepository
     val viewState: LiveData<UserSearchViewState>
         get() = mViewState
 
-    private fun getUsers(username: String) = viewModelScope.launch {
-        val data = userSearchRepository.getUsersFromPaging(username, Constants.PER_PAGE_ITEM_COUNT)
+    private fun getUsers(keyword: String) = viewModelScope.launch {
+        val data = userSearchRepository.getUsersFromPaging(keyword, Constants.PER_PAGE_ITEM_COUNT)
             .cachedIn(viewModelScope)
         mViewState.value =
             mViewState.value?.copy(data = data)

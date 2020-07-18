@@ -24,7 +24,6 @@ abstract class GithubDatabaseApplication : RoomDatabase() {
                 GithubDatabaseApplication::class.java,
                 "db_github"
             )
-                .fallbackToDestructiveMigration()
                 .build()
             return instance!!
         }

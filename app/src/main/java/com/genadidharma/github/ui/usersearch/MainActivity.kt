@@ -22,9 +22,11 @@ import com.faltenreich.skeletonlayout.applySkeleton
 import com.genadidharma.github.R
 import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.repository.usersearch.UserSearchRepository
+import com.genadidharma.github.ui.userdetail.UserDetailActivity
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModel
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModelFactory
 import com.genadidharma.github.ui.util.CircleTransform
+import com.genadidharma.github.ui.util.Constants
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,14 +42,13 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private val TAG = MainActivity::class.java.simpleName
         const val USER_FAVORITE_ITEM_TAG = "favorite"
-        const val USER_IS_FAVORITE_TAG = "isFavorite"
-        const val USER_POSITION_TAG = "position"
-        const val REQUEST_LIKE = 200
-        const val RESULT_LIKE = 300
+        const val USER_ITEM_IS_FAVORITE_TAG= "user_item_is_favorite"
+        const val USER_ITEM_IS_FAVORITE_REQUEST_CODE = 201
+        const val USER_ITEM_IS_FAVORITE_RESULT_CODE = 301
     }
 
     private lateinit var viewModel: UserSearchViewModel
-    private val adapter = UserSearchAdapter()
+    private lateinit var adapter: UserSearchAdapter
     private lateinit var skeleton: Skeleton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,14 +57,18 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        setupViewModel()
+        adapter = UserSearchAdapter() { userSearchItem ->
+            val intent = Intent(this@MainActivity, UserDetailActivity::class.java)
+            intent.putExtra(USER_FAVORITE_ITEM_TAG, userSearchItem)
+            startActivityForResult(intent, USER_ITEM_IS_FAVORITE_REQUEST_CODE)
+        }
 
         rv_user.adapter = adapter.withLoadStateHeaderAndFooter(
             header = UserSearchLoadStateAdapter { adapter.retry() },
             footer = UserSearchLoadStateAdapter { adapter.retry() }
         )
 
-        skeleton = rv_user.applySkeleton(R.layout.user_list_item, 10)
+        skeleton = rv_user.applySkeleton(R.layout.user_list_item, Constants.SKELETON_ITEM_COUNT)
 
         adapter.addLoadStateListener { loadStates ->
 
@@ -76,19 +81,18 @@ class MainActivity : AppCompatActivity() {
                 showError(errorState.error)
             }
         }
+
+        setupViewModel()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            REQUEST_LIKE -> {
-                when (resultCode) {
-                    RESULT_LIKE -> {
-                        val bundle = data?.extras
-                        val position = bundle!!.getInt(USER_POSITION_TAG)
-                        val isFavorite = bundle.getBoolean(USER_IS_FAVORITE_TAG)
-//                        adapter.updateItem(position, isFavorite)
-                    }
+
+        when (resultCode) {
+            USER_ITEM_IS_FAVORITE_RESULT_CODE -> {
+                val isFavorite = data?.getBooleanExtra(USER_ITEM_IS_FAVORITE_TAG, false)
+                isFavorite?.let {
+                    if(it) rv_user.smoothScrollToPosition(0)
                 }
             }
         }
@@ -116,6 +120,7 @@ class MainActivity : AppCompatActivity() {
         setupAvatar(menu)
         return true
     }
+
 
     private fun setupAvatar(menu: Menu) {
         val profileItem = menu.findItem(R.id.ic_profile)

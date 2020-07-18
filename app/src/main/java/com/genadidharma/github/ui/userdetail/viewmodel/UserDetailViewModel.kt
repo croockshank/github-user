@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.genadidharma.github.repository.UserDetailRepository
+import com.genadidharma.github.repository.usersearch.UserSearchRepository
 import com.genadidharma.github.ui.userdetail.UserDetailViewState
 import kotlinx.coroutines.launch
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.faltenreich.skeletonlayout.SkeletonLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/skl_user_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,5 +13,33 @@
         <include layout="@layout/activity_user_detail" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lt_error_animation"
+            android:layout_width="@dimen/sm_lottie_animation_size"
+            android:layout_height="@dimen/sm_lottie_animation_size"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/error_coffee_spilled" />
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/med_spacing"
+            android:text="@string/error_placeholder"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+    </LinearLayout>
 
 </com.faltenreich.skeletonlayout.SkeletonLayout>

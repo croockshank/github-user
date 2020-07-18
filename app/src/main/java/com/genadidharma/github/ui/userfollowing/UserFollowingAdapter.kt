@@ -38,8 +38,10 @@ class UserFollowingAdapter :
             get() = itemView
 
         fun bindItem(item: UserFollowingItem) {
+            iv_favorite.visibility = View.GONE
             Picasso.get()
                 .load(item.avatarUrl)
+                .placeholder(R.drawable.profile_image_placeholder)
                 .into(iv_avatar)
             tv_name.text = item.login ?: "-"
             tv_type.text = item.type ?: "-"

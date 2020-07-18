@@ -5,7 +5,7 @@ import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.model.UserSearchRemoteKey
 
 interface UserSearchDataStore {
-    suspend fun insertUsers(users: MutableList<UserSearchItem>?)
+    suspend fun insertUsers(users: MutableList<UserSearchItem>?): List<Long>
 
     suspend fun insertRemoteKey(remoteKey: UserSearchRemoteKey)
 

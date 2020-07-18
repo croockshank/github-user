@@ -7,7 +7,7 @@ class Constants {
     companion object {
         const val BLUR_RADIUS = 15
         const val SKELETON_ITEM_COUNT = 10
-        const val PER_PAGE_ITEM_COUNT = 15
+        const val PER_PAGE_ITEM_COUNT = 30
 
         fun convertNumber(count: Int?): String {
             if (count != null) {

@@ -1,8 +1,11 @@
 package com.genadidharma.github.ui.userfollowers
 
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
+import androidx.constraintlayout.solver.widgets.ConstraintWidget.GONE
 import androidx.recyclerview.widget.RecyclerView
 import com.genadidharma.github.R
 import com.genadidharma.github.model.UserFollowersItem
@@ -38,8 +41,10 @@ class UserFollowersAdapter :
             get() = itemView
 
         fun bindItem(item: UserFollowersItem) {
+            iv_favorite.visibility = View.GONE
             Picasso.get()
                 .load(item.avatarUrl)
+                .placeholder(R.drawable.profile_image_placeholder)
                 .into(iv_avatar)
             tv_name.text = item.login ?: "-"
             tv_type.text = item.type ?: "-"

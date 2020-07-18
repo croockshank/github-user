@@ -5,8 +5,9 @@ import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.model.UserSearchRemoteKey
 import com.genadidharma.github.webservice.GithubAPIService
 
-class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService): UserSearchDataStore{
-    override suspend fun insertUsers(users: MutableList<UserSearchItem>?) {
+class UserSearchRemoteDataStore(private val githubAPIService: GithubAPIService) :
+    UserSearchDataStore {
+    override suspend fun insertUsers(users: MutableList<UserSearchItem>?): List<Long> {
         TODO("Not yet implemented")
     }
 
@@ -18,7 +19,7 @@ class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService)
         TODO("Not yet implemented")
     }
 
-    override suspend fun deleteFromFavorite() {
+    override suspend fun updateToNotFavorite(userId: Int) {
         TODO("Not yet implemented")
     }
 
@@ -28,7 +29,7 @@ class UserSearchRemoteDataStore (private val githubAPIService: GithubAPIService)
         perPage: Int
     ): MutableList<UserSearchItem>? {
         val response = githubAPIService.getUsers(keyword, page, perPage)
-        if (response.isSuccessful){
+        if (response.isSuccessful) {
             return response.body()?.items
         }
 

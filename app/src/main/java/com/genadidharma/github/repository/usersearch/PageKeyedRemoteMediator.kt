@@ -9,6 +9,7 @@ import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.model.UserSearchRemoteKey
 import retrofit2.HttpException
 import java.io.IOException
+import java.lang.Exception
 
 
 @OptIn(ExperimentalPagingApi::class)
@@ -40,27 +41,43 @@ class PageKeyedRemoteMediator(
             val data = remoteDataStore?.getUsers(
                 keyword = keyword,
                 page = loadKey,
-                perPage = when (loadType) {
-                    LoadType.REFRESH -> state.config.initialLoadSize
-                    else -> state.config.pageSize
-                }
+                perPage = state.config.pageSize
             )
 
-            if (loadType == LoadType.REFRESH) {
-                localDataStore?.deleteUsers()
-                localDataStore?.deleteRemoteKey()
+            if (data != null) {
+                if (data.isNotEmpty()) {
+
+                    data.map {
+                        it.indexInResponse = loadKey
+                    }
+
+                    if (loadType == LoadType.REFRESH) {
+                        localDataStore?.deleteUsers()
+                        localDataStore?.deleteRemoteKey()
+                    }
+
+                    val nextKey = loadKey + 1
+
+                    localDataStore?.insertUsers(data)
+
+                    localDataStore?.insertRemoteKey(
+                        UserSearchRemoteKey(
+                            keyword,
+                            nexPageKey = nextKey
+                        )
+                    )
+
+                    return MediatorResult.Success(endOfPaginationReached = data.isEmpty())
+                }
             }
 
-            val nextKey = if (data!!.isEmpty()) null else loadKey + 1
-
-            localDataStore?.insertUsers(data)
-            localDataStore?.insertRemoteKey(UserSearchRemoteKey(keyword, nexPageKey = nextKey))
-
-            return MediatorResult.Success(endOfPaginationReached = data.isEmpty())
+            return MediatorResult.Error(NullPointerException("Results Not Found"))
 
         } catch (e: IOException) {
             return MediatorResult.Error(e)
         } catch (e: HttpException) {
+            return MediatorResult.Error(e)
+        }catch (e: Exception){
             return MediatorResult.Error(e)
         }
 

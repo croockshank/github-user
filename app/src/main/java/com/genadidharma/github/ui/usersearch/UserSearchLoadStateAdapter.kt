@@ -40,13 +40,15 @@ class UserSearchLoadStateViewHolder(
 
     fun bind(loadState: LoadState) {
         if (loadState is LoadState.Error) {
-            Snackbar.make(
-                parentView,
-                loadState.error.message.toString(),
-                Snackbar.LENGTH_INDEFINITE
-            ).setAction(R.string.retry) {
-                retry.invoke()
-            }.show()
+            if (loadState.error !is NullPointerException) {
+                Snackbar.make(
+                    parentView,
+                    loadState.error.message.toString(),
+                    Snackbar.LENGTH_INDEFINITE
+                ).setAction(R.string.retry) {
+                    retry.invoke()
+                }.show()
+            }
         }
         progress_bar.isVisible = loadState is LoadState.Loading
     }

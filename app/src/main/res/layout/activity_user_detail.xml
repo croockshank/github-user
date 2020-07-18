@@ -215,58 +215,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabs" >
+        app:layout_constraintTop_toBottomOf="@+id/tabs">
 
     </androidx.viewpager.widget.ViewPager>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lt_error_animation"
-        android:layout_width="@dimen/sm_lottie_animation_size"
-        android:layout_height="@dimen/sm_lottie_animation_size"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/error_coffee_spilled" />
-
-    <TextView
-        android:id="@+id/tv_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lt_error_animation" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="@dimen/med_spacing"
-        android:focusable="true" />
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/not_favorite"
+        app:shrinkMotionSpec="@animator/fab_shrink_animator"
+        app:icon="@drawable/ic_baseline_star_border_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/gr_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="iv_banner, ib_back,tv_title,iv_avatar,tv_name,tv_email,btn_follow,tv_repository,tv_repository_placeholder,v_divider_repo,tv_followers,tv_followers_placeholder,v_divider_followers,tv_following,tv_following_placeholder,tabs,vp_tabs" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/gr_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="lt_error_animation, tv_error"
-        tools:visibility="gone" />
+        app:constraint_referenced_ids="iv_banner, ib_back,tv_title,iv_avatar,tv_name,tv_email,btn_follow,tv_repository,tv_repository_placeholder,v_divider_repo,tv_followers,tv_followers_placeholder,v_divider_followers,tv_following,tv_following_placeholder,tabs,vp_tabs, fab_favorite" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

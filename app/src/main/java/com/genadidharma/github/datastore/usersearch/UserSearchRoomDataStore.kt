@@ -1,28 +1,35 @@
 package com.genadidharma.github.datastore.usersearch
 
+import android.util.Log
 import androidx.paging.PagingSource
-import com.genadidharma.github.model.UserSearchItem
-import com.genadidharma.github.model.UserSearchRemoteKey
 import com.genadidharma.github.db.UserSearchDao
 import com.genadidharma.github.db.UserSearchRemoteKeyDao
+import com.genadidharma.github.model.UserSearchItem
+import com.genadidharma.github.model.UserSearchRemoteKey
 
 
-class UserSearchRoomDataStore(private val userSearchDao: UserSearchDao, private val userSearchRemoteKeyDao: UserSearchRemoteKeyDao) :
+class UserSearchRoomDataStore(
+    private val userSearchDao: UserSearchDao,
+    private val userSearchRemoteKeyDao: UserSearchRemoteKeyDao
+) :
     UserSearchDataStore {
-    override suspend fun insertUsers(users: MutableList<UserSearchItem>?) {
-        return userSearchDao.insertUsers(users)
+    override suspend fun insertUsers(users: MutableList<UserSearchItem>?): List<Long> {
+        val insertIds = userSearchDao.insertUsers(users)
+        Log.i("Data store", "$users")
+        Log.i("Data store", "$insertIds")
+        return insertIds
     }
 
     override suspend fun insertRemoteKey(remoteKey: UserSearchRemoteKey) {
-        return userSearchRemoteKeyDao.insertRemoteKey(remoteKey)
+        userSearchRemoteKeyDao.insertRemoteKey(remoteKey)
     }
 
     override suspend fun updateToFavorite(userId: Int) {
-        return userSearchDao.updateToFavorite(userId = userId)
+        userSearchDao.updateToFavorite(userId = userId)
     }
 
     override suspend fun updateToNotFavorite(userId: Int) {
-        return userSearchDao.updateToNotFavorite(userId = userId)
+        userSearchDao.updateToNotFavorite(userId = userId)
     }
 
     override suspend fun getUsers(
@@ -34,7 +41,7 @@ class UserSearchRoomDataStore(private val userSearchDao: UserSearchDao, private 
     }
 
     override fun getUsersFromDB(keyword: String): PagingSource<Int, UserSearchItem> {
-        return userSearchDao.getUsers(keyword = "%$keyword%")
+        return userSearchDao.getUsers(keyword = "$keyword%")
     }
 
     override suspend fun getUsersRemoteKey(): UserSearchRemoteKey {

@@ -23,4 +23,7 @@
     <string name="search_hint">Tap Search Icon to Begin Search</string>
     <string name="snackbar_error_message">Error adding to Favorite. Retry in 5 seconds</string>
     <string name="retry">Retry</string>
+    <string name="favorite">Favorite!</string>
+    <string name="not_favorite">Not Favorite</string>
+    <string name="error_placeholder">Something Went Wrong, Try Again</string>
 </resources>

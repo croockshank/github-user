@@ -1,5 +1,6 @@
 package com.genadidharma.github.repository.usersearch
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.genadidharma.github.datastore.usersearch.UserSearchDataStore

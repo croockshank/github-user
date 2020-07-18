@@ -2,77 +2,85 @@ package com.genadidharma.github.ui.userdetail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.createSkeleton
 import com.genadidharma.github.R
 import com.genadidharma.github.model.UserDetailItem
+import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.repository.UserDetailRepository
+import com.genadidharma.github.repository.usersearch.UserSearchRepository
 import com.genadidharma.github.ui.userdetail.viewmodel.UserDetailViewModel
 import com.genadidharma.github.ui.userdetail.viewmodel.UserDetailViewModelFactory
 import com.genadidharma.github.ui.usersearch.MainActivity
 import com.genadidharma.github.ui.util.Constants
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_user_detail.*
 import kotlinx.android.synthetic.main.activity_user_detail_skeleton.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class UserDetailActivity : AppCompatActivity() {
 
-    /*private var userFavoriteItem: UserFavoriteItem? = null
-    private var position: Int? = null
+    private var userSearchItem: UserSearchItem? = null
     private lateinit var viewModel: UserDetailViewModel
-    private lateinit var userFavoritesViewModel: UserFavoritesViewModel
     private lateinit var skeleton: Skeleton
+    private val userSearchRepository: UserSearchRepository = UserSearchRepository.instance
+
+    private var isFavorite = false
+    private var userId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_detail_skeleton)
-        userFavoriteItem = intent.getParcelableExtra(MainActivity.USER_FAVORITE_ITEM_TAG)
-        position = intent.getIntExtra(MainActivity.USER_POSITION_TAG, 0)
+
+        userSearchItem = intent.getParcelableExtra(MainActivity.USER_FAVORITE_ITEM_TAG)
         setupViewPager()
 
         skeleton = skl_user_detail.createSkeleton()
         skeleton.showSkeleton()
 
-        userFavoriteItem?.apply {
-            setupViewModel(login.toString())
+        userSearchItem?.also {
+            setupViewModel(it.login.toString())
+            isFavorite = it.isFavorite
+            userId = it.id
         }
+
+        toggleFavorite()
+
         setupTransition()
 
         fab_favorite.setOnClickListener {
-            userFavoriteItem?.also {
-                addRemoveFromFavorite(it)
+            if (isFavorite) {
+                userId?.let { userId -> updateToNotFavorite(userId) }
+            } else {
+                userId?.let { userId -> updateToFavorite(userId) }
             }
-        }
-
-        ib_back.setOnClickListener {
-            onBackPressed()
+            toggleFavorite()
         }
     }
 
     override fun onBackPressed() {
-        val bundle = Bundle()
         val intent = Intent()
-        position?.let { bundle.putInt(MainActivity.USER_POSITION_TAG, it) }
-        userFavoriteItem?.isFavorite?.let { bundle.putBoolean(MainActivity.USER_IS_FAVORITE_TAG, it) }
-        intent.putExtras(bundle)
-        setResult(MainActivity.RESULT_LIKE, intent)
+        intent.putExtra(MainActivity.USER_ITEM_IS_FAVORITE_TAG, isFavorite)
+        setResult(MainActivity.USER_ITEM_IS_FAVORITE_RESULT_CODE, intent)
         super.onBackPressed()
     }
 
     private fun setupViewPager() {
         val userDetailViewPagerAdapter =
-            UserDetailViewPagerAdapter(this, supportFragmentManager, userFavoriteItem?.login)
+            UserDetailViewPagerAdapter(this, supportFragmentManager, userSearchItem?.login)
         vp_tabs.adapter = userDetailViewPagerAdapter
         vp_tabs.addOnPageChangeListener(object : TabLayout.TabLayoutOnPageChangeListener(tabs) {
             override fun onPageScrollStateChanged(state: Int) {
@@ -98,6 +106,11 @@ class UserDetailActivity : AppCompatActivity() {
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
                 toggleRefreshing(p1 == R.id.expanded)
+
+                when (p1) {
+                    R.id.expanded -> fab_favorite.extend()
+                    R.id.collapsed -> fab_favorite.shrink()
+                }
             }
         })
     }
@@ -115,14 +128,6 @@ class UserDetailActivity : AppCompatActivity() {
             getUser(username)
             srl_user_detail.setOnRefreshListener { getUser(username) }
         }
-
-        val userFavoriteFactory = UserFavoritesViewModelFactory(UserFavoriteRepository.instance)
-        userFavoritesViewModel =
-            ViewModelProvider(this, userFavoriteFactory).get(UserFavoritesViewModel::class.java)
-                .apply {
-                    viewState.observe(this@UserDetailActivity, Observer(this@UserDetailActivity::handleFavoriteState))
-                    isFavorite = userFavoriteItem!!.isFavorite
-                }
     }
 
     private fun handleState(viewState: UserDetailViewState?) {
@@ -146,9 +151,8 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     private fun showData(data: UserDetailItem) {
-        gr_content.visibility = View.VISIBLE
-        gr_error.visibility = View.GONE
-        lt_error_animation.visibility = View.VISIBLE
+        ml_detail.visibility = View.VISIBLE
+        ll_error.visibility = View.GONE
 
         Picasso.get().load(data.avatarUrl)
             .transform(BlurTransformation(this, Constants.BLUR_RADIUS)).into(iv_banner)
@@ -162,40 +166,33 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     private fun showError(e: Exception) {
-        gr_content.visibility = View.GONE
+        ml_detail.visibility = View.GONE
         tv_error.text = e.message
-        gr_error.visibility = View.VISIBLE
-        lt_error_animation.visibility = View.GONE
+        ll_error.visibility = View.VISIBLE
     }
 
-    private fun addRemoveFromFavorite(userFavoriteItem: UserFavoriteItem) {
-        if (!userFavoriteItem.isFavorite) {
-            userFavoritesViewModel.addToFavorite(userFavoriteItem)
+    private fun toggleFavorite() {
+        if (isFavorite) {
+            fab_favorite.icon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_star_24)
+            fab_favorite.text = getString(R.string.favorite)
         } else {
-            userFavoritesViewModel.removeFromFavorite(userFavoriteItem.login.toString())
+            fab_favorite.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_baseline_star_border_24)
+            fab_favorite.text = getString(R.string.not_favorite)
         }
     }
 
-    private fun handleFavoriteState(viewState: UserFavoritesViewState) {
-        viewState.let {
-            toggleFabFavorite(it.isFavorite)
-            it.error.let {
-                Snackbar.make(
-                    skl_user_detail,
-                    getString(R.string.snackbar_error_message),
-                    Snackbar.LENGTH_SHORT
-                )
-                    .setAction(R.string.retry) {
-                        addRemoveFromFavorite(userFavoriteItem!!)
-                    }
-            }
+    private fun updateToFavorite(userId: Int) {
+        lifecycleScope.launch {
+            userSearchRepository.updateToFavorite(userId)
         }
+        isFavorite = true
     }
 
-    private fun toggleFabFavorite(isFavorite: Boolean) {
-        if (isFavorite) fab_favorite.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_baseline_favorite_24))
-        else fab_favorite.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_baseline_favorite_border_24))
-
-        userFavoriteItem?.isFavorite = isFavorite
-    }*/
+    private fun updateToNotFavorite(userId: Int) {
+        lifecycleScope.launch {
+            userSearchRepository.updateToNotFavorite(userId)
+        }
+        isFavorite = false
+    }
 }
