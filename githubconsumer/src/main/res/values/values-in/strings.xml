@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Github Consumer</string>
+    <string name="app_name">Github</string>
     <string name="toolbar_user_title">Pengguna</string>
     <string name="menu_search_user">Cari Pengguna</string>
     <string name="menu_search_user_title">Cari Pengguna</string>

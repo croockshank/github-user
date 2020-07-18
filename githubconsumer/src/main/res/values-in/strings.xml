@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Github Consumer</string>
-    <string name="toolbar_user_title">Pengguna</string>
+    <string name="toolbar_user_title">Pengguna Favorite</string>
     <string name="menu_search_user">Cari Pengguna</string>
     <string name="menu_search_user_title">Cari Pengguna</string>
     <string name="menu_user_profile">Profil Pengguna</string>
@@ -27,4 +27,5 @@
     <string name="favorite">Favorit!</string>
     <string name="not_favorite">Bukan Favorit</string>
     <string name="error_placeholder">Ada Masalah, Coba Lagi</string>
+    <string name="empty_favorite_user_placeholder">Tidak ada data Pengguna yang kamu Favoritkan</string>
 </resources>
