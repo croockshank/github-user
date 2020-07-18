@@ -3,6 +3,7 @@
     package="com.genadidharma.github">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <permission android:name="com.genadidharma.github.READ_DATABASE" android:protectionLevel="normal"/>
 
     <application
         android:name=".util.BaseApplication"
@@ -12,6 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name=".provider.GithubContentProvider"
+            android:authorities="com.genadidharma.github"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="com.genadidharma.github.READ_DATABASE"/>
+
         <activity
             android:name=".ui.userdetail.UserDetailActivity"
             android:label="@string/title_activity_user_detail"
