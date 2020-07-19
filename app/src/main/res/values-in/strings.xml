@@ -4,6 +4,7 @@
     <string name="toolbar_user_title">Pengguna</string>
     <string name="menu_search_user">Cari Pengguna</string>
     <string name="menu_search_user_title">Cari Pengguna</string>
+    <string name="toolbar_setting_title">Pengaturan</string>
     <string name="menu_user_profile">Profil Pengguna</string>
     <string name="menu_user_profile_title">Profile Pengguna</string>
     <string name="title_activity_user_detail">Detail Pengguna</string>

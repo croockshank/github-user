@@ -1,6 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Github</string>
     <string name="toolbar_user_title">User</string>
+    <string name="toolbar_setting_title">Settings</string>
     <string name="menu_search_user">Search User</string>
     <string name="menu_search_user_title">Search User</string>
     <string name="menu_user_profile">User Profile</string>
@@ -26,4 +27,6 @@
     <string name="favorite">Favorite!</string>
     <string name="not_favorite">Not Favorite</string>
     <string name="error_placeholder">Something Went Wrong, Try Again</string>
+    <string name="key_notify" tools:ignore="ExtraTranslation" translatable="false">notify</string>
+    <string name="notify_placeholder">Notify Me Every 09:00 AM</string>
 </resources>

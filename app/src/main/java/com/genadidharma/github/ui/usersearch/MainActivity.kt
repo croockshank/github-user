@@ -22,6 +22,7 @@ import com.faltenreich.skeletonlayout.applySkeleton
 import com.genadidharma.github.R
 import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.repository.usersearch.UserSearchRepository
+import com.genadidharma.github.ui.settings.SettingsActivity
 import com.genadidharma.github.ui.userdetail.UserDetailActivity
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModel
 import com.genadidharma.github.ui.usersearch.viewmodel.UserSearchViewModelFactory
@@ -119,6 +120,15 @@ class MainActivity : AppCompatActivity() {
 
         setupAvatar(menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.ic_profile -> {
+                startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
