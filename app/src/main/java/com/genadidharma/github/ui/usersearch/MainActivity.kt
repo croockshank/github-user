@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private val TAG = MainActivity::class.java.simpleName
         const val USER_FAVORITE_ITEM_TAG = "favorite"
-        const val USER_ITEM_IS_FAVORITE_TAG= "user_item_is_favorite"
+        const val USER_ITEM_IS_FAVORITE_TAG = "user_item_is_favorite"
         const val USER_ITEM_IS_FAVORITE_REQUEST_CODE = 201
         const val USER_ITEM_IS_FAVORITE_RESULT_CODE = 301
     }
@@ -93,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             USER_ITEM_IS_FAVORITE_RESULT_CODE -> {
                 val isFavorite = data?.getBooleanExtra(USER_ITEM_IS_FAVORITE_TAG, false)
                 isFavorite?.let {
-                    if(it) rv_user.smoothScrollToPosition(0)
+                    if (it) rv_user.smoothScrollToPosition(0)
                 }
             }
         }
@@ -105,6 +106,9 @@ class MainActivity : AppCompatActivity() {
         val searchItem: MenuItem? = menu?.findItem(R.id.ic_search)
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView: SearchView? = searchItem?.actionView as SearchView
+        searchView?.queryHint = resources.getString(R.string.search_view_hint)
+        searchView?.findViewById<View>(androidx.appcompat.R.id.search_plate)
+            ?.setBackgroundColor(Color.TRANSPARENT)
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -123,7 +127,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.ic_profile -> {
                 startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
             }
@@ -138,7 +142,7 @@ class MainActivity : AppCompatActivity() {
             .get()
             .load(R.drawable.img_avatar)
             .transform(CircleTransform())
-            .error(R.drawable.ic_baseline_person_24)
+            .error(R.drawable.img_avatar)
             .into(object : Target {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
 

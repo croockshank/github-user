@@ -23,9 +23,11 @@
     <string name="sample_lorem">lorem</string>
     <string name="back_button">Tombol Kembali</string>
     <string name="search_hint">Ketuk Ikon Pencari untuk Memulai Pencarian</string>
+    <string name="search_view_hint">Cari Pengguna Github</string>
     <string name="snackbar_error_message">Gagal menambahkan. Coba lagi</string>
     <string name="retry">Coba Lagi</string>
     <string name="favorite">Favorit!</string>
     <string name="not_favorite">Bukan Favorit</string>
     <string name="error_placeholder">Ada Masalah, Coba Lagi</string>
+    <string name="notify_placeholder">Kirim Notifikasi Setiap Pukul 09:00 Pagi</string>
 </resources>

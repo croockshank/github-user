@@ -7,6 +7,7 @@ import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
 import com.genadidharma.github.db.GithubDatabaseApplication
+import java.lang.IllegalArgumentException
 
 class GithubContentProvider : ContentProvider() {
 
@@ -29,11 +30,13 @@ class GithubContentProvider : ContentProvider() {
     override fun query(
         uri: Uri, projection: Array<String>?, selection: String?,
         selectionArgs: Array<String>?, sortOrder: String?
-    ): Cursor? {
-        return when (sUriMatcher.match(uri)) {
+    ): Cursor {
+        val cursor: Cursor = when (sUriMatcher.match(uri)) {
             USER_FAVORITE -> databaseApplication.userSearchDao().getUsersFavorite()
-            else -> null
+            else -> throw IllegalArgumentException("Unknown URI: $uri")
         }
+        cursor.setNotificationUri(context!!.contentResolver, uri)
+        return cursor
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {

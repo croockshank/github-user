@@ -22,11 +22,12 @@
     <string name="sample_lorem">lorem</string>
     <string name="back_button">Back Button</string>
     <string name="search_hint">Tap Search Icon to Begin Search</string>
+    <string name="search_view_hint">Search Github Users</string>
     <string name="snackbar_error_message">Error adding to Favorite. Retry in 5 seconds</string>
     <string name="retry">Retry</string>
     <string name="favorite">Favorite!</string>
     <string name="not_favorite">Not Favorite</string>
     <string name="error_placeholder">Something Went Wrong, Try Again</string>
     <string name="key_notify" tools:ignore="ExtraTranslation" translatable="false">notify</string>
-    <string name="notify_placeholder">Notify Me Every 09:00 AM</string>
+    <string name="notify_placeholder">Send Notification Every 09:00 AM</string>
 </resources>

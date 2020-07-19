@@ -1,8 +1,14 @@
 package com.genadidharma.githubconsumer.ui
 
+import android.content.ContentResolver
+import android.database.ContentObserver
 import android.database.Cursor
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
@@ -18,8 +24,7 @@ class MainActivity : AppCompatActivity() {
         const val LOADER_USER_FAVORITE = 1
     }
 
-    private val userFavoriteAdapter =
-        UserFavoriteAdapter()
+    private val userFavoriteAdapter = UserFavoriteAdapter()
     private val favoriteList = mutableListOf<UserFavoriteItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,10 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         val loaderManager = LoaderManager.getInstance(this)
         loaderManager.initLoader(LOADER_USER_FAVORITE, null, mLoaderCallback)
-
-        srl_user.setOnRefreshListener {
-            loaderManager.initLoader(LOADER_USER_FAVORITE, null, mLoaderCallback)
-        }
     }
 
     private val mLoaderCallback: LoaderManager.LoaderCallbacks<Cursor> =
@@ -47,14 +48,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-                srl_user.isRefreshing = false
                 favoriteList.addAll(MappingHelper.mapCursorToArrayList(data))
                 userFavoriteAdapter.updateData(favoriteList)
                 toggleViews(favoriteList.size == 0)
             }
 
             override fun onLoaderReset(loader: Loader<Cursor>) {
-                srl_user.isRefreshing = false
+
             }
 
             private fun toggleViews(favoriteListEmpty: Boolean) {
