@@ -13,12 +13,14 @@ import com.genadidharma.github.repository.UserFollowersRepository
 import com.genadidharma.github.repository.UserFollowingRepository
 import com.genadidharma.github.repository.usersearch.UserSearchRepository
 import com.genadidharma.github.webservice.RetrofitApp
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
         Stetho.initializeWithDefaults(this)
+        AndroidThreeTen.init(this)
 
         val githubAPIService = RetrofitApp.GITHUB_API_SERVICE
         val databaseApplication = GithubDatabaseApplication.getInstance(this)

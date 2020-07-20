@@ -41,7 +41,7 @@ class UserSearchRoomDataStore(
     }
 
     override fun getUsersFromDB(keyword: String): PagingSource<Int, UserSearchItem> {
-        return userSearchDao.getUsers(keyword = "$keyword%")
+        return userSearchDao.getUsers(keyword = "%$keyword%")
     }
 
     override suspend fun getUsersRemoteKey(): UserSearchRemoteKey {

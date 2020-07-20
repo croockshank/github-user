@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.genadidharma.github.model.UserSearchItem
 import com.genadidharma.github.model.UserSearchRemoteKey
 
@@ -12,6 +13,7 @@ import com.genadidharma.github.model.UserSearchRemoteKey
     version = 1,
     exportSchema = false
 )
+@TypeConverters(RoomTypeConverters::class)
 abstract class GithubDatabaseApplication : RoomDatabase() {
     companion object {
         private var instance: GithubDatabaseApplication? = null

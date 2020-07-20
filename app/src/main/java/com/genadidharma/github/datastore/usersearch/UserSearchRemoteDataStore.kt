@@ -7,6 +7,9 @@ import com.genadidharma.github.webservice.GithubAPIService
 
 class UserSearchRemoteDataStore(private val githubAPIService: GithubAPIService) :
     UserSearchDataStore {
+
+    private val queryConstruct = "in:login"
+
     override suspend fun insertUsers(users: MutableList<UserSearchItem>?): List<Long> {
         TODO("Not yet implemented")
     }
@@ -28,7 +31,7 @@ class UserSearchRemoteDataStore(private val githubAPIService: GithubAPIService) 
         page: Int,
         perPage: Int
     ): MutableList<UserSearchItem>? {
-        val response = githubAPIService.getUsers(keyword, page, perPage)
+        val response = githubAPIService.getUsers("$keyword $queryConstruct", page, perPage)
         if (response.isSuccessful) {
             return response.body()?.items
         }

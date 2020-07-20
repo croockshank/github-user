@@ -2,10 +2,10 @@ package com.genadidharma.github.model
 
 import android.os.Parcelable
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import org.threeten.bp.OffsetDateTime
 
 @Parcelize
 @Entity(tableName = "users_search")
@@ -71,7 +71,9 @@ data class UserSearchItem(
 
     var indexInResponse: Int = -1,
 
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean = false,
+
+    val favoriteTimeStamp: OffsetDateTime? = null
 ) : Parcelable {
     @Parcelize
     data class UserSearchResponse(

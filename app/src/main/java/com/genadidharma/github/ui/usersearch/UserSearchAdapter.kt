@@ -1,6 +1,5 @@
 package com.genadidharma.github.ui.usersearch
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,7 +59,8 @@ class UserSearchAdapterViewHolder(itemView: View) :
                 .into(iv_avatar)
             tv_name.text = item.login
             tv_type.text = item.type ?: "-"
-            if (item.isFavorite) iv_favorite.visibility = View.VISIBLE
+            if (item.isFavorite) iv_favorite.visibility = View.VISIBLE else iv_favorite.visibility =
+                View.INVISIBLE
             containerView?.setOnClickListener { listener(item) }
         }
     }

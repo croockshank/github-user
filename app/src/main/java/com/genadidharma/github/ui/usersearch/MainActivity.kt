@@ -177,7 +177,6 @@ class MainActivity : AppCompatActivity() {
         keyword.trim().let {
             if (it.isNotEmpty()) {
                 search(keyword)
-                rv_user.smoothScrollToPosition(0)
             }
         }
     }
